@@ -54,7 +54,7 @@ donald walks in geometrical patterns, he goes up, goes down on a diagonal and th
 next thing:
 donald stares into a window and goes to an otherwordly world
 
-think of geometrical, linear and non linear thingies.
+think of geometrical, linear and non linear thingies
 
 todo:
 * start sketching the intro, one minute
