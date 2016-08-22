@@ -32,7 +32,9 @@ what about grants?
 interdepartmental grants
 
 roles:
-
+donald: choreographer, dancer
+aaron: interactive programming, technical director
+yuli: let's talk with her
 
 intro:
 the first cue is music
@@ -49,7 +51,10 @@ goes away, continues flowing
 next thing:
 donald walks in geometrical patterns, he goes up, goes down on a diagonal and then goes up again straight, and then accross the stage.
 
+next thing:
+donald stares into a window and goes to an otherwordly world
 
+think of geometrical, linear and non linear thingies.
 
 todo:
 * start sketching the intro, one minute
