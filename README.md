@@ -25,3 +25,35 @@ not just black and white, we can use colors for projection
 we can also integrate yulis 3d work
 
 donald is thinking about just floor projection, but we can include the psyche (the background screen).
+
+the deadline for this show is early november
+
+what about grants?
+interdepartmental grants
+
+roles:
+
+
+intro:
+the first cue is music
+lights fade down
+something liquid flowing down from upstage right
+to downstage right
+like a pool of lights
+oily thingy pouring down and it makes a separation
+and donald stands there, it parts and donald comes in
+directions taken from perspective of performer
+and then the flow stops being input and the remaining oil
+goes away, continues flowing
+
+next thing:
+donald walks in geometrical patterns, he goes up, goes down on a diagonal and then goes up again straight, and then accross the stage.
+
+
+
+todo:
+* start sketching the intro, one minute
+* we need someone for documentation, video and sound
+* research the available projectors onsite and at nyu itp
+* take measurements onsite
+* go with yuli to test projectors when she gets back
