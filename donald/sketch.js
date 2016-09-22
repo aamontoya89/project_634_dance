@@ -1,4 +1,9 @@
-
+//6:30
+//dance piece by donald shorter
+//software by aarón montoya-moraga + yuli cai
+//runs on a web browser
+//uses p5.js library
+//september 2016
 
 //sceneInfo
 var sceneInfo = [];
@@ -10,12 +15,20 @@ var currentMilli;
 var currentSecond;
 var currentMinute;
 
-//displayed on screen
+//timer displayed on screen
 var displaySecond;
 var displayMinute;
+//message displayed on screen
+var message = "";
 
 //sound
 var soundtrack;
+
+//tap tempo
+var tapTempo = [];
+var tempo = 0;
+var previousMoment = 0;
+
 
 function preload() {
   soundtrack = loadSound("assets/soundtrack.mp3");
@@ -30,11 +43,14 @@ function setup() {
   //don't show the mouse
   noCursor();
 
+  //white background
   background(255);
-  
-  
+
+  //playback the soundtrack
   soundtrack.setVolume(1.0);
   soundtrack.play();
+
+  initTempo();
 }
 
 function draw() {
@@ -60,6 +76,30 @@ function draw() {
   noStroke();
   textSize(32);
   text(displayMinute + ":" + displaySecond, 10, 30);
+  text(displayMinute + ":" + displaySecond, 10, 30);
+ 
+ //display message on screen
+  for (var i = 0; i < sceneInfo.length; i++) {
+    if (currentMinute >= sceneMinute[i] && currentSecond >= sceneSecond[i]) {
+      message = sceneInfo[i];
+    }
+  }
+  //put the scene text on the screen
+  text(message, 10, 70);
+
+
+
+  //update tempo
+  defineTempo();
+
+  if (millis() > previousMoment + tempo) {
+    previousMoment = millis();
+    fill(random(255), random(255), random(255));
+  }
+
+  ellipse(mouseX, mouseY, 400, 400);
+
+
 
 }
 
@@ -117,4 +157,41 @@ function loadInfo() {
   sceneSecond.push(1);
   sceneSecond.push(20);
 
+}
+
+//set the initial array of tapTempo values to 0
+function initTempo() {
+  tapTempo[0] = 0;
+  tapTempo[1] = 0;
+  tapTempo[2] = 0;
+  tapTempo[3] = 0;
+}
+
+//detect tab key to control tap tempo
+function keyPressed() {
+
+  if (keyCode == RIGHT_ARROW) {
+    //delete the first element of the array
+    tapTempo.shift();
+    //append the current millis() counting
+    tapTempo.push(millis());
+    //print to console
+    console.log(tapTempo[0]);
+  }
+
+}
+
+//calculate tempo according to tapTempo array
+
+function defineTempo() {
+
+  //check if all of the numbers are different  
+  if (tapTempo[0] != 0) {
+    tempo = 0;
+    tempo += abs(tapTempo[0] - tapTempo[1]);
+    tempo += abs(tapTempo[1] - tapTempo[2]);
+    tempo += abs(tapTempo[2] - tapTempo[3]);
+    //average
+    tempo = tempo / 3;
+  }
 }
