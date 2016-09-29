@@ -1,5 +1,24 @@
+//project 6:34
+//concept, choreography, performer: donald shorter
+
 import processing.sound.*;
 SoundFile file;
+
+//declare  strings for holding time values
+//to be displayed as timer
+String seconds, minutes;
+
+//variables for calculating time 
+//since sketch started
+int currentMillis;
+int currentSeconds;
+int currentMinutes;
+
+//declare arrays to hold the info
+//about every scene of the piece
+String[] sceneInfo = new String[16];
+int[] sceneMinute = new int[16];
+int[] sceneSecond = new int[16];
 
 void setup() {
   //size(800, 800);
@@ -8,16 +27,27 @@ void setup() {
   file = new SoundFile(this, "music.mp3");
   file.play();
   noCursor();
+
+  //load the info from the play
+  //right now is hard coded
+  loadInfo();
 }
 
 void draw() {
 
-  String seconds, minutes;
+  //white background
+  background(255);
 
-  String[] sceneInfo = new String[16];
-  int[] sceneMinute = new int[16];
-  int[] sceneSecond = new int[16];
+  calculateTime();
 
+  displayCounter();
+
+  displaySceneInfo();
+
+  displaySpotLight();
+}
+
+void loadInfo() {
   sceneInfo[0] = "donald is not on stage";
   sceneInfo[1] = "donald crawls into stage";
   sceneInfo[2] = "donald wakes up";
@@ -69,13 +99,15 @@ void draw() {
   sceneSecond[13] = 30;
   sceneSecond[14] = 0;
   sceneSecond[15] = 20;
+}
 
-  background(255);
+void calculateTime() {
+  //get current time since the sketch started
+  currentMillis = millis();
 
-  int currentMillis = millis();
-
-  int currentSeconds = currentMillis / 1000;
-  int currentMinutes = currentMillis / 60000;
+  //get minutes and seconds since the sketch started
+  currentSeconds = currentMillis / 1000;
+  currentMinutes = currentMillis / 60000;
 
   //wrapup seconds
   currentSeconds = currentSeconds % 60;
@@ -87,24 +119,29 @@ void draw() {
   }
 
   minutes = str(currentMinutes);
+}
 
+void displayCounter() {
   //put the counter on the screen
   noStroke();
   textSize(32);
   text(minutes + ":" + seconds, 10, 30);
-  
+}
+
+void displaySceneInfo() {
+
   String message = "";
-  
-  for(int i = 0; i < sceneInfo.length; i++) {
+
+  for (int i = 0; i < sceneInfo.length; i++) {
     if (currentMinutes >= sceneMinute[i] && currentSeconds >= sceneSecond[i]) {
       message = sceneInfo[i];
     }
   }
- 
-  
   //put the scene text on the screen
   text(message, 10, 70);
+}
 
+void displaySpotLight() {
   //white ellipse that follows the cursor
   fill(0);  
   ellipse(mouseX, mouseY, 350, 350);
