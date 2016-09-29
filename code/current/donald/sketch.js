@@ -5,7 +5,7 @@
 //uses p5.js library
 //september 2016
 
-//sceneInfo
+//scene information
 var sceneInfo = [];
 var sceneMinute = [];
 var sceneSecond = [];
@@ -20,7 +20,10 @@ var currentMinute;
 var displaySecond;
 var displayMinute;
 //message displayed on screen
-var message = "";
+var info = "";
+var displayInfo = true;
+//variable to toggle display of timer
+var displayTimer = true;
 
 //sound
 var soundtrack;
@@ -80,17 +83,16 @@ function draw() {
   //put the counter on the screen
   noStroke();
   textSize(32);
-  text(displayMinute + ":" + displaySecond, 10, 30);
-  text(displayMinute + ":" + displaySecond, 10, 30);
+  text(displayMinute + ":" + displaySecond, windowWidth/10, 2*windowHeight/15);
 
   //display message on screen
   for (var i = 0; i < sceneInfo.length; i++) {
     if (currentMinute >= sceneMinute[i] && currentSecond >= sceneSecond[i]) {
-      message = sceneInfo[i];
+      info = sceneInfo[i];
     }
   }
   //put the scene text on the screen
-  text(message, 10, 70);
+  text(info, windowWidth/5, windowHeight/15);
 
   //update tempo
   defineTempo();
