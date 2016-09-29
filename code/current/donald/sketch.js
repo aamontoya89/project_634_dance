@@ -17,25 +17,31 @@ var currentSecond;
 var currentMinute;
 
 //timer displayed on screen
-var displaySecond;
-var displayMinute;
+var timerSecond;
+var timerMinute;
 //message displayed on screen
 var info = "";
-var displayInfo = true;
+//variable to toggle display of scene info
+var hideInfo = false;
 //variable to toggle display of timer
-var displayTimer = true;
+var hideTimer = false;
+//variable to toggle display of stage directions
+var hideStageDirections = false;
 
 //sound
 var soundtrack;
+var soundtrackIsPlaying = true;
 
 //tap tempo
 var tapTempo = [];
 var tempo = 0;
 var previousMoment = 0;
 
-
+//function for loading the assets
 function preload() {
+  //load the sound file
   soundtrack = loadSound("assets/soundtrack.mp3");
+  //save the moment when the assets are done loading
   loadMilli = millis();
 }
 
@@ -43,6 +49,7 @@ function setup() {
   //fullscreen
   createCanvas(windowWidth, windowHeight);
 
+  //loadInfo of the scenes
   loadInfo();
 
   //don't show the mouse
@@ -52,59 +59,48 @@ function setup() {
   background(0);
 
   //playback the soundtrack
-  soundtrack.setVolume(1.0);
-  soundtrack.play();
+  playSoundtrack();
 
   initTempo();
+
+  //setup text styling
+  setupText();
 }
 
 function draw() {
 
+  console.log(soundtrack.isPlaying());
 
-  //black background
-  background(0);
-  
-  //retrieve time data
-  currentMilli = millis() - loadMilli;
-  currentSecond = floor(currentMilli / 1000);
-  currentMinute = floor(currentMilli / 60000);
+  if (soundtrack.isPlaying()) {
 
-  //wrapup seconds
-  currentSecond = currentSecond % 60;
+    //black background
+    background(0);
 
-  if (currentSecond < 10) {
-    displaySecond = "0" + str(currentSecond);
-  } else {
-    displaySecond = str(currentSecond);
-  }
+    //time retrieval
+    timeRetrieval();
 
-  displayMinute = str(currentMinute);
+    //put the timer on the screen
+    displayTimer();
 
-  //put the counter on the screen
-  noStroke();
-  textSize(32);
-  text(displayMinute + ":" + displaySecond, windowWidth/10, 2*windowHeight/15);
+    displayInfo();
 
-  //display message on screen
-  for (var i = 0; i < sceneInfo.length; i++) {
-    if (currentMinute >= sceneMinute[i] && currentSecond >= sceneSecond[i]) {
-      info = sceneInfo[i];
+
+    //update tempo
+    defineTempo();
+
+    if (millis() > previousMoment + tempo) {
+      previousMoment = millis();
+      fill(random(255), random(255), random(255));
     }
+
+    ellipse(mouseX, mouseY, 400, 400);
+
+    //display stage directions
+    displayStageDirections();
+
+  } else {
+    background(0);
   }
-  //put the scene text on the screen
-  text(info, windowWidth/5, windowHeight/15);
-
-  //update tempo
-  defineTempo();
-
-  if (millis() > previousMoment + tempo) {
-    previousMoment = millis();
-    fill(random(255), random(255), random(255));
-  }
-
-  ellipse(mouseX, mouseY, 400, 400);
-  
-  displayStageDirections();
 
 }
 
@@ -202,26 +198,113 @@ function defineTempo() {
 }
 
 function displayStageDirections() {
-  
-  stroke(0);
-  fill(255);
-  var upStage = "upstage";
-  var downStage = "downstage";
-  var centerStage = "center";
-  var leftStage = "l\ne\nf\nt\ns\nt\na\ng\ne";
-  var rightStage = "r\ni\ng\nh\nt\ns\nt\na\ng\ne";
-  
-  textAlign(CENTER, CENTER);
-  text(upStage, windowWidth/2, windowHeight/15);
-  text(centerStage, windowWidth/2, windowHeight/2);
-  text(downStage, windowWidth/2, 14*windowHeight/15);
-  text(rightStage, windowWidth/20, windowHeight/2);
-  text(leftStage, 19*windowWidth/20, windowHeight/2);
-  
+  if (!hideStageDirections) {
+    stroke(0);
+    fill(255);
+    var upStage = "upstage";
+    var downStage = "downstage";
+    var centerStage = "center";
+    var leftStage = "l\ne\nf\nt\ns\nt\na\ng\ne";
+    var rightStage = "r\ni\ng\nh\nt\ns\nt\na\ng\ne";
+
+    textAlign(CENTER, CENTER);
+    text(upStage, windowWidth / 2, windowHeight / 15);
+    text(centerStage, windowWidth / 2, windowHeight / 2);
+    text(downStage, windowWidth / 2, 14 * windowHeight / 15);
+    text(rightStage, windowWidth / 20, windowHeight / 2);
+    text(leftStage, 19 * windowWidth / 20, windowHeight / 2);
+  }
+}
+
+//function for playing back the soundtrack
+function playSoundtrack() {
+  soundtrack.setVolume(1.0);
+  soundtrack.play();
+}
+
+//function for text setup
+function setupText() {
+  textFont("Helvetica");
+  textSize(10);
+  textStyle(NORMAL);
+}
+
+function timeRetrieval() {
+  //retrieve time data
+  currentMilli = millis() - loadMilli;
+  currentSecond = floor(currentMilli / 1000);
+  currentMinute = floor(currentMilli / 60000);
+
+  //convert from integer to string
+  timerMinute = str(currentMinute);
+
+  //wrapup seconds
+  currentSecond = currentSecond % 60;
+
+  //add a 0 to the left if currentSecond < 10
+  if (currentSecond < 10) {
+    timerSecond = "0" + str(currentSecond);
+  } else {
+    timerSecond = str(currentSecond);
+  }
+
+}
+
+//function triggered when the browser window is resized
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
 
 
+//function triggered when a key is pressed
+//used for hiding and making visible the 
+//text on the screen
+function keyTyped() {
+  if (key === "t") {
+    hideTimer = !hideTimer;
+  } else if (key === "i") {
+    hideInfo = !hideInfo;
+  } else if (key === "s") {
+    hideStageDirections = !hideStageDirections;
+  } else if (key === "a") {
+    hideTimer = false;
+    hideInfo = false;
+    hideStageDirections = false;
+  } else if (key === "z") {
+    hideTimer = true;
+    hideInfo = true;
+    hideStageDirections = true;
+  } else if (key === "r") {
+    resetPiece();
+  }
+}
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);  
+function resetPiece() {
+  soundtrack.stop();
+  soundtrack.play();
+  loadMilli = millis();
+}
+
+
+function displayTimer() {
+  if (!hideTimer) {
+    //put the timer on the screen
+    noStroke();
+    textSize(32);
+    text(timerMinute + ":" + timerSecond, windowWidth / 10, 2 * windowHeight / 15);
+  }
+
+}
+
+function displayInfo() {
+  if (!hideInfo) {
+    //display message on screen
+    for (var i = 0; i < sceneInfo.length; i++) {
+      if (currentMinute >= sceneMinute[i] && currentSecond >= sceneSecond[i]) {
+        info = sceneInfo[i];
+      }
+    }
+    //put the scene text on the screen
+    text(info, windowWidth / 5, windowHeight / 15);
+  }
 }
