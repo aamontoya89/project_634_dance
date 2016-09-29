@@ -1,4 +1,4 @@
-//6:30
+//6:34
 //dance piece by donald shorter
 //software by aarón montoya-moraga + yuli cai
 //runs on a web browser
@@ -11,6 +11,7 @@ var sceneMinute = [];
 var sceneSecond = [];
 
 //time calculations
+var loadMilli;
 var currentMilli;
 var currentSecond;
 var currentMinute;
@@ -32,6 +33,7 @@ var previousMoment = 0;
 
 function preload() {
   soundtrack = loadSound("assets/soundtrack.mp3");
+  loadMilli = millis();
 }
 
 function setup() {
@@ -44,7 +46,7 @@ function setup() {
   noCursor();
 
   //white background
-  background(255);
+  background(0);
 
   //playback the soundtrack
   soundtrack.setVolume(1.0);
@@ -55,9 +57,12 @@ function setup() {
 
 function draw() {
 
-  background(255);
 
-  currentMilli = millis();
+  //black background
+  background(0);
+  
+  //retrieve time data
+  currentMilli = millis() - loadMilli;
   currentSecond = floor(currentMilli / 1000);
   currentMinute = floor(currentMilli / 60000);
 
@@ -77,8 +82,8 @@ function draw() {
   textSize(32);
   text(displayMinute + ":" + displaySecond, 10, 30);
   text(displayMinute + ":" + displaySecond, 10, 30);
- 
- //display message on screen
+
+  //display message on screen
   for (var i = 0; i < sceneInfo.length; i++) {
     if (currentMinute >= sceneMinute[i] && currentSecond >= sceneSecond[i]) {
       message = sceneInfo[i];
@@ -86,8 +91,6 @@ function draw() {
   }
   //put the scene text on the screen
   text(message, 10, 70);
-
-
 
   //update tempo
   defineTempo();
@@ -98,8 +101,8 @@ function draw() {
   }
 
   ellipse(mouseX, mouseY, 400, 400);
-
-
+  
+  displayStageDirections();
 
 }
 
@@ -194,4 +197,29 @@ function defineTempo() {
     //average
     tempo = tempo / 3;
   }
+}
+
+function displayStageDirections() {
+  
+  stroke(0);
+  fill(255);
+  var upStage = "upstage";
+  var downStage = "downstage";
+  var centerStage = "center";
+  var leftStage = "l\ne\nf\nt\ns\nt\na\ng\ne";
+  var rightStage = "r\ni\ng\nh\nt\ns\nt\na\ng\ne";
+  
+  textAlign(CENTER, CENTER);
+  text(upStage, windowWidth/2, windowHeight/15);
+  text(centerStage, windowWidth/2, windowHeight/2);
+  text(downStage, windowWidth/2, 14*windowHeight/15);
+  text(rightStage, windowWidth/20, windowHeight/2);
+  text(leftStage, 19*windowWidth/20, windowHeight/2);
+  
+}
+
+
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);  
 }
