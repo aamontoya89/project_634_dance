@@ -37,6 +37,11 @@ var tapTempo = [];
 var tempo = 0;
 var previousMoment = 0;
 
+//arrays for holding the trail information
+var trailX = [];
+var trailY = [];
+var trailMaximumLength = 1000;
+
 //function for loading the assets
 function preload() {
   //load the sound file
@@ -69,7 +74,7 @@ function setup() {
 
 function draw() {
 
-  console.log(soundtrack.isPlaying());
+  //console.log(soundtrack.isPlaying());
 
   if (soundtrack.isPlaying()) {
 
@@ -84,16 +89,22 @@ function draw() {
 
     displayInfo();
 
-
     //update tempo
     defineTempo();
 
-    if (millis() > previousMoment + tempo) {
-      previousMoment = millis();
-      fill(random(255), random(255), random(255));
-    }
+    // if (millis() > previousMoment + tempo) {
+    //   previousMoment = millis();
+    //   fill(random(255), random(255), random(255));
+    // }
 
-    ellipse(mouseX, mouseY, 400, 400);
+
+    ellipse(mouseX, mouseY, 100, 100);
+
+    //update trail
+    updateTrail();
+
+    //display trail
+    displayTrail();
 
     //display stage directions
     displayStageDirections();
@@ -285,7 +296,6 @@ function resetPiece() {
   loadMilli = millis();
 }
 
-
 function displayTimer() {
   if (!hideTimer) {
     //put the timer on the screen
@@ -306,5 +316,43 @@ function displayInfo() {
     }
     //put the scene text on the screen
     text(info, windowWidth / 5, windowHeight / 15);
+  }
+}
+
+//function for updating trail left by donald
+function updateTrail() {
+
+  //if the mouse is pressed, add to the trail
+  if (mouseIsPressed) {
+    //append to the end of the trails the current
+    //mouse position
+    trailX.push(mouseX);
+    trailY.push(mouseY);
+
+    //if the length of the trails is longer
+    //than the maximum, pop the first elements
+    while (trailX.length > trailMaximumLength) {
+      trailX.splice(0, 1);
+    }
+    while (trailY.length > trailMaximumLength) {
+      trailY.splice(0, 1);
+    }
+
+  }
+
+}
+
+//function for displaying the trail
+function displayTrail() {
+  if ((trailX.length) > 0 && (trailY.length > 0)) {
+
+    for (var i = 0; i < trailX.length; i++) {
+      for (var j = 0; j < trailY.length; j++) {
+        fill(random(255), random(255), random(255));
+        var radius = 200*(trailX.length-i)/trailX.length
+        ellipse(trailX[i], trailY[j], radius, radius);
+      }
+    }
+
   }
 }
