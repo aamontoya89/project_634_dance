@@ -1,42 +1,25 @@
-# project_six_minutes_dance
+# project_634_dance
 
-music is Timothy Andres- Antennae
+this repository holds the files for the dance piece 6:34
 
-with donald
+concept, choreography and performance: donald shorter
+programming and visuals: aarón montoya-moraga + yuli cai
+music: "antennae", timothy andres
+
+
+possible things:
+biometric sensors on dancer
+kinect
+
+starts in complete blackness and music starts to play
+not just black and white, we can use colors for projection
 
 dance projectors where instead of lighting,
 we will use projectors for interactive video
 
-dance is about investigating setting and space
+todo:
+someone for documentation, video and sound
 
-if you change configuration in space, the dance changes
-the mood of the dance changes
-
-biometric sensors on dancer
-kinect
-
-piece starts with something simple
-ideas progress and escalates in intensity
-
-starts in complete blackness and music starts to play
-donalds want to keep the music
-can you send that to me please?
-
-not just black and white, we can use colors for projection
-
-we can also integrate yulis 3d work
-
-donald is thinking about just floor projection, but we can include the psyche (the background screen).
-
-the deadline for this show is early november
-
-what about grants?
-interdepartmental grants
-
-roles:
-donald: choreographer, dancer
-aaron: interactive programming, technical director
-yuli: let's talk with her
 
 intro:
 the first cue is music
@@ -58,9 +41,6 @@ donald stares into a window and goes to an otherwordly world
 
 think of geometrical, linear and non linear thingies
 
-todo:
-* start sketching the intro, one minute
-* we need someone for documentation, video and sound
+
 * research the available projectors onsite and at nyu itp
 * take measurements onsite
-* go with yuli to test projectors when she gets back
