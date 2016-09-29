@@ -10,6 +10,8 @@ programming and visuals: aarón montoya-moraga + yuli cai
 
 music: "antennae", timothy andres
 
+performances: november 3,4,5 2016 at nyu tisch school of the arts
+
 ## to do
 
 possible additions:
