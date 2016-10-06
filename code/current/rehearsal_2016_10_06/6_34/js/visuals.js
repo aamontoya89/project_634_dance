@@ -77,8 +77,7 @@ function voidStage() {
 }
 
 function spotlight() {
-    fill(255);
-    noStroke();
+
     spotlightDiameter = spotlightDiameter + spotlightDiameterStep;
 
     if (spotlightDiameter > spotlightDiameterMax) {
@@ -103,6 +102,21 @@ function spotlight() {
     for (var i = 0; i < trail.length; i++) {
         ellipse(trail[i].x, trail[i].y, spotlightDiameter * (i + 1) / (trailAmount), spotlightDiameter * (i + 1) / (trailAmount));
     }
+}
+
+function lookAtWindow() {
+
+
+    trail.splice(0, 1);
+
+
+    noStroke();
+    fill(255, 100);
+    noStroke();
+    for (var i = 0; i < trail.length; i++) {
+        ellipse(trail[i].x, trail[i].y, spotlightDiameter * (i + 1) / (trailAmount), spotlightDiameter * (i + 1) / (trailAmount));
+    }
+
 }
 
 function displayCurrentVisuals() {
@@ -164,10 +178,15 @@ function displayCurrentVisuals() {
     } else if (currentMinute == 1) {
 
         if (currentSecond >= 55) {
-            //goes to the window
-        } else if (currentSecond >= 15) {
-            //does diagonal pattern
+          lookAtWindow();
+
+        } else if (currentSecond >= 30) {
             spotlight();
+
+        } else if (currentSecond >= 15) {
+            //goes to the window
+
+            lookAtWindow();
 
         } else if (currentSecond >= 10) {
             //does diagonal pattern
