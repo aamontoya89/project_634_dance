@@ -7,6 +7,7 @@
 
 //scene information
 var sceneInfo = [];
+var sceneVisuals = [];
 var sceneMinute = [];
 var sceneSecond = [];
 
@@ -19,8 +20,10 @@ var currentMinute;
 //timer displayed on screen
 var timerSecond;
 var timerMinute;
-//message displayed on screen
-var info = "";
+//donald message displayed on screen
+var infoDonald = "";
+//visuals message displayed on screen
+var infoVisuals = "";
 //variable to toggle display of scene info
 var hideInfo = false;
 //variable to toggle display of timer
@@ -99,8 +102,12 @@ function draw() {
     //   fill(random(255), random(255), random(255));
     // }
 
-
-    ellipse(mouseX, mouseY, 100, 100);
+    //
+    var introRadius = 50*millis()/1000;
+    if (introRadius > 500) {
+      introRadius = 500;
+    }
+    ellipse(mouseX, mouseY, introRadius, introRadius);
 
     //update trail
     updateTrail();
@@ -120,22 +127,41 @@ function draw() {
 
 function loadInfo() {
 
-  sceneInfo.push("donald is not on stage");
-  sceneInfo.push("donald crawls into stage");
-  sceneInfo.push("donald wakes up");
-  sceneInfo.push("donald does diagonal pattern");
-  sceneInfo.push("donald goes to the window");
-  sceneInfo.push("donald swings his arms");
-  sceneInfo.push("donald swirling around");
-  sceneInfo.push("donald does another diagonal pass");
-  sceneInfo.push("donald stands around");
-  sceneInfo.push("donald moves all over the place");
-  sceneInfo.push("donald does a backstand");
-  sceneInfo.push("donald stands up again");
-  sceneInfo.push("donald goes back to the window");
-  sceneInfo.push("donald pivots around the window");
-  sceneInfo.push("donald slows down");
-  sceneInfo.push("donald lays on the ground");
+  sceneInfo.push("not on stage");
+  sceneInfo.push("crawls into stage");
+  sceneInfo.push("wakes up");
+  sceneInfo.push("does diagonal pattern");
+  sceneInfo.push("goes to the window");
+  sceneInfo.push("swings his arms");
+  sceneInfo.push("swirling around");
+  sceneInfo.push("does another diagonal pass");
+  sceneInfo.push("stands around");
+  sceneInfo.push("moves all over the place");
+  sceneInfo.push("does a backstand");
+  sceneInfo.push("stands up again");
+  sceneInfo.push("goes back to the window");
+  sceneInfo.push("pivots around the window");
+  sceneInfo.push("slows down");
+  sceneInfo.push("lays on the ground");
+  
+  sceneVisuals.push("black");
+  sceneVisuals.push("spotlight growing");
+  sceneVisuals.push("spotlight maximum");
+  sceneVisuals.push("following and trail");
+  sceneVisuals.push("goes to the window");
+  sceneVisuals.push("swings his arms");
+  sceneVisuals.push("swirling around");
+  sceneVisuals.push("does another diagonal pass");
+  sceneVisuals.push("stands around");
+  sceneVisuals.push("moves all over the place");
+  sceneVisuals.push("does a backstand");
+  sceneVisuals.push("stands up again");
+  sceneVisuals.push("goes back to the window");
+  sceneVisuals.push("pivots around the window");
+  sceneVisuals.push("slows down");
+  sceneVisuals.push("lays on the ground");
+  
+  
 
   sceneMinute.push(0);
   sceneMinute.push(0);
@@ -199,7 +225,7 @@ function keyPressed() {
 
 function defineTempo() {
 
-  //check if all of the numbers are different  
+  //check if all of the numbers are different
   if (tapTempo[0] != 0) {
     tempo = 0;
     tempo += abs(tapTempo[0] - tapTempo[1]);
@@ -270,7 +296,7 @@ function windowResized() {
 
 
 //function triggered when a key is pressed
-//used for hiding and making visible the 
+//used for hiding and making visible the
 //text on the screen
 function keyTyped() {
   if (key === "t") {
@@ -313,11 +339,14 @@ function displayInfo() {
     //display message on screen
     for (var i = 0; i < sceneInfo.length; i++) {
       if (currentMinute >= sceneMinute[i] && currentSecond >= sceneSecond[i]) {
-        info = sceneInfo[i];
+        infoDonald = sceneInfo[i];
+        infoVisuals = sceneVisuals[i];
       }
     }
     //put the scene text on the screen
-    text(info, windowWidth / 5, windowHeight / 15);
+    text("donald: " + infoDonald, windowWidth / 5, windowHeight / 15);
+    //put the visuals text on the screen
+    text("visuals" + infoVisuals, windowWidth /5, 2* windowHeight /15);
   }
 }
 
@@ -364,7 +393,7 @@ function displayTrail() {
     for (var i = 0; i < trailX.length; i++) {
       for (var j = 0; j < trailY.length; j++) {
         fill(random(255), random(255), random(255));
-        var radius = 50*(trailLifetime - (millis() - trailMoment[i]))/1000;
+        var radius = 50 * (trailLifetime - (millis() - trailMoment[i])) / 1000;
         console.log(radius);
         ellipse(trailX[i], trailY[j], radius, radius);
       }
