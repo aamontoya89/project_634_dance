@@ -7,6 +7,9 @@
 
 //variable for storing the canvas
 var mainCanvas;
+var auxCanvas = document.getElementById("auxCanvas");
+var ctx = auxCanvas.getContext("2d");
+console.log(ctx);
 
 //function for loading the assets
 function preload() {
@@ -20,6 +23,9 @@ function setup() {
 
   //createfullscreen canvas
   mainCanvas = createCanvas(windowWidth, windowHeight);
+  ctx.moveTo(0,0);
+  ctx.lineTo(200,100);
+  ctx.stroke();
 
   //set canvas position
   mainCanvas.parent("mainDiv");
