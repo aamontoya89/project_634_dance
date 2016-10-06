@@ -31,6 +31,9 @@ function draw() {
     if (trail.length > trailAmount) {
         trail.splice(0, 1);
     }
+
+
+
     switch (onScene) {
         case 0:
             //do nothing
@@ -42,15 +45,19 @@ function draw() {
             break;
         case 2:
             console.log("Scene2");
-
+            var s2Trail = [];
+            var staticPos = createVector(width - 150, 150);
+            for (var i = 0; i < trail.length; i++) {
+                s2Trail.push(staticPos);
+            }
             if (s2Timer < 100) {
                 var newSize = spotSize * sin(0.1 * timer);
                 drawTrail(trail, newSize);
                 var oppSize = spotSize * cos(0.1 * timer);
-                drawOppositeTrail(trail, oppSize);
+                drawTrail(s2Trail, oppSize);
             } else if (s2Timer >= 100) {
                 var newOppSize = spotSize * cos(0.03 * timer);
-                drawOppositeTrail(trail, newOppSize);
+                drawTrail(s2Trail, newOppSize);
             }
 
             s2Timer++;
