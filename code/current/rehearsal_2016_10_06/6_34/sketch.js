@@ -5,6 +5,9 @@
 //uses p5.js library
 //october 2016
 
+//variable for storing the canvas
+var mainCanvas;
+
 //function for loading the assets
 function preload() {
   //load the sound file
@@ -14,8 +17,16 @@ function preload() {
 }
 
 function setup() {
-  //fullscreen
-  createCanvas(windowWidth, windowHeight);
+
+  //createfullscreen canvas
+  mainCanvas = createCanvas(windowWidth, windowHeight);
+
+  //set canvas position
+  mainCanvas.parent("mainDiv");
+  //mainCanvas.position(0,0);
+
+  //set canvas class
+  mainCanvas.class("main");
 
   //loadInfo of the scenes
   loadInfo();

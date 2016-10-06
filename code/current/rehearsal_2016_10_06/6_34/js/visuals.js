@@ -68,14 +68,16 @@ function displayTrail() {
 function voidStage() {
     console.log("void stage");
     //background(0);
+    mainCanvas.elt.style.display = "visible";
 }
 
-function spotlight(beginSpotlight) {
-  var spotlightTime = millis() - beginSpotlight;
-    console.log("spotlight" + spotlightTime);
+function spotlight() {
+    //var spotlightTime = millis() - beginSpotlight;
+    //console.log("spotlight" + spotlightTime);
     fill(255);
     noStroke();
     ellipse(mouseX, mouseY, 100, 100);
+    mainCanvas.elt.style.display = "hidden";
 }
 
 var visualz = [voidStage, spotlight];
@@ -87,8 +89,8 @@ function displayCurrentVisuals() {
         voidStage();
     } else if (currentMinute >= 0 && currentSecond >= 10) {
         if (spotlight)
-        var beginSpotlight = millis();
-        spotlight();
+        //var beginSpotlight = millis();
+            spotlight();
     } else if (currentMinute >= 0 && currentSecond >= 0) {
         voidStage();
     }
