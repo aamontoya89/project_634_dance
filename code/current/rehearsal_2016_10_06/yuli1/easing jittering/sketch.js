@@ -42,10 +42,17 @@ function draw() {
             break;
         case 2:
             console.log("Scene2");
-            var newSize = spotSize * sin(0.1 * timer);
+
             if (s2Timer < 100) {
+                var newSize = spotSize * sin(0.1 * timer);
                 drawTrail(trail, newSize);
+                var oppSize = spotSize * cos(0.1 * timer);
+                drawOppositeTrail(trail, oppSize);
+            } else if (s2Timer >= 100) {
+                var newOppSize = spotSize * cos(0.03 * timer);
+                drawOppositeTrail(trail, newOppSize);
             }
+
             s2Timer++;
             break;
 
@@ -63,10 +70,20 @@ function drawTrail(trail, size) {
     }
 }
 
-function keyTyped() {
-    if (key === 'a') {
-        onScene = 1;
+function drawOppositeTrail(trail, size) {
+    fill(255, 100);
+    noStroke();
+    for (var i = 0; i < trail.length; i++) {
+        ellipse(width - trail[i].x, trail[i].y, size * (i + 1), size * (i + 1));
+    }
+}
 
+function keyTyped() {
+    if (key === 'q') {
+        onScene = 0;
+
+    } else if (key === 'a') {
+        onScene = 1;
     } else if (key === 'b') {
         onScene = 2;
     }
