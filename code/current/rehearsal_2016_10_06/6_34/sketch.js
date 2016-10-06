@@ -20,7 +20,7 @@ function preload() {
 function setup() {
 
   //createfullscreen canvas
-  mainCanvas = createCanvas(windowWidth, windowHeight);
+  mainCanvas = createCanvas(1400, 800);
 
   //set canvas position
   mainCanvas.parent("mainDiv");
@@ -33,7 +33,7 @@ function setup() {
   loadInfo();
 
   //don't show the mouse
-  noCursor();
+  //noCursor();
 
   //black background
   background(0);
