@@ -32,6 +32,8 @@ function displayInfo() {
         infoVisuals = sceneVisuals[i];
       }
     }
+    noStroke();
+    fill(255);
     //put the scene text on the screen
     text("donald: " + infoDonald, windowWidth / 5, windowHeight / 15);
     //put the visuals text on the screen

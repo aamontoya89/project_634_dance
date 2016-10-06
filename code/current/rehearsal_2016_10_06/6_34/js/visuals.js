@@ -13,13 +13,13 @@ var trailMaximumLength = 1000;
 var trailLifetime = 5000;
 var posX = 0;
 var posY = 0;
-var easing = 0.5;
+var easing = 0.1;
 var trail = [];
-var trailAmount = 20;
+var trailAmount = 50;
 
 //diameter spotlight
 var spotlightDiameter = 0.1;
-var spotlightDiameterStep = 1;
+var spotlightDiameterStep = 0.04;
 var spotlightDiameterMax = 200;
 
 //function for updating trail left by donald
@@ -109,47 +109,47 @@ function displayCurrentVisuals() {
 
     if (currentMinute > 6) {
 
-      if (currentSecond >= 55) {
+        if (currentSecond >= 55) {
 
-      } else if (currentSecond >= 0) {
+        } else if (currentSecond >= 0) {
 
-      }
+        }
 
 
     } else if (currentMinute == 6) {
 
-      if (currentSecond >= 55) {
+        if (currentSecond >= 55) {
 
-      } else if (currentSecond >= 0) {
+        } else if (currentSecond >= 0) {
 
-      }
+        }
 
 
     } else if (currentMinute == 5) {
 
-      if (currentSecond >= 55) {
+        if (currentSecond >= 55) {
 
-      } else if (currentSecond >= 0) {
+        } else if (currentSecond >= 0) {
 
-      }
+        }
 
 
     } else if (currentMinute == 4) {
 
-      if (currentSecond >= 55) {
+        if (currentSecond >= 55) {
 
-      } else if (currentSecond >= 0) {
+        } else if (currentSecond >= 0) {
 
-      }
+        }
 
 
     } else if (currentMinute == 3) {
 
-      if (currentSecond >= 55) {
+        if (currentSecond >= 55) {
 
-      } else if (currentSecond >= 0) {
+        } else if (currentSecond >= 0) {
 
-      }
+        }
 
 
     } else if (currentMinute == 2) {
@@ -164,25 +164,31 @@ function displayCurrentVisuals() {
     } else if (currentMinute == 1) {
 
         if (currentSecond >= 55) {
-
+            //goes to the window
         } else if (currentSecond >= 15) {
+            //does diagonal pattern
+            spotlight();
 
+        } else if (currentSecond >= 10) {
+            //does diagonal pattern
+            spotlight();
         } else if (currentSecond => 0) {
+            //hold
             spotlight();
         }
 
     } else if (currentMinute == 0) {
 
         if (currentSecond >= 55) {
-            //donald starts to do diagonal
+            //wakes up
             spotlight();
 
-        } else if (currentSecond >= 35) {
-            //donald enters stage
+        } else if (currentSecond >= 30) {
+            //crawls into stage
             spotlight();
 
         } else if (currentSecond >= 0) {
-            //start
+            //not on stage
             voidStage();
         }
 
