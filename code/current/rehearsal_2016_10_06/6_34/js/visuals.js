@@ -76,8 +76,6 @@ function voidStage() {
 }
 
 function spotlight() {
-    //var spotlightTime = millis() - beginSpotlight;
-    //console.log("spotlight" + spotlightTime);
     fill(255);
     noStroke();
     spotlightDiameter = spotlightDiameter + spotlightDiameterStep;
@@ -86,14 +84,14 @@ function spotlight() {
       spotlightDiameter = spotlightDiameterMax;
     }
 
-    ellipse(mouseX, mouseY, diameter, diameter);
+    ellipse(mouseX, mouseY, spotlightDiameter, spotlightDiameter);
 }
 
 function displayCurrentVisuals() {
 
-    if (currentMinute >= 0 && currentSecond >= 50) {
-        voidStage();
-    } else if (currentMinute >= 0 && currentSecond >= 30) {
+    if (currentMinute >= 0 && currentSecond >= 55) {
+        spotlight();
+    } else if (currentMinute >= 0 && currentSecond >= 35) {
         spotlight();
     } else if (currentMinute >= 0 && currentSecond >= 0) {
         voidStage();
