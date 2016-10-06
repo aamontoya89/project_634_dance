@@ -12,6 +12,11 @@ var trailMoment = [];
 var trailMaximumLength = 1000;
 var trailLifetime = 5000;
 
+//diameter spotlight
+var spotlightDiameter = 0.1;
+var spotlightDiameterStep = 1;
+var spotlightDiameterMax = 400;
+
 
 //function for updating trail left by donald
 function updateTrail() {
@@ -68,7 +73,6 @@ function displayTrail() {
 function voidStage() {
     console.log("void stage");
     //background(0);
-    mainCanvas.elt.style.display = "visible";
 }
 
 function spotlight() {
@@ -76,21 +80,21 @@ function spotlight() {
     //console.log("spotlight" + spotlightTime);
     fill(255);
     noStroke();
-    ellipse(mouseX, mouseY, 100, 100);
-    mainCanvas.elt.style.display = "hidden";
+    spotlightDiameter = spotlightDiameter + spotlightDiameterStep;
+
+    if (spotlightDiameter > spotlightDiameterMax) {
+      spotlightDiameter = spotlightDiameterMax;
+    }
+
+    ellipse(mouseX, mouseY, diameter, diameter);
 }
-
-var visualz = [voidStage, spotlight];
-
 
 function displayCurrentVisuals() {
 
-    if (currentMinute >= 0 && currentSecond >= 20) {
+    if (currentMinute >= 0 && currentSecond >= 50) {
         voidStage();
-    } else if (currentMinute >= 0 && currentSecond >= 10) {
-        if (spotlight)
-        //var beginSpotlight = millis();
-            spotlight();
+    } else if (currentMinute >= 0 && currentSecond >= 30) {
+        spotlight();
     } else if (currentMinute >= 0 && currentSecond >= 0) {
         voidStage();
     }
