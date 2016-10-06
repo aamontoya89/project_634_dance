@@ -10,12 +10,19 @@ var trailAmount = 10;
 var spotSize = 20;
 var onScene = 0;
 var timer = 0;
+var mousePos;
 
 //scene2 vars
 var s2Timer = 0;
 
+//scene3 vars
+//particle system
+var pSystem;
+var fallingParticleSize = 40;
+
 function setup() {
     createCanvas(1400, 800);
+    pSystem = new ParticleSystem(createVector(0, 0));
 }
 
 function draw() {
@@ -31,6 +38,8 @@ function draw() {
     if (trail.length > trailAmount) {
         trail.splice(0, 1);
     }
+    mousePos = createVector(mouseX, mouseY);
+
 
 
 
@@ -39,12 +48,12 @@ function draw() {
             //do nothing
             break;
         case 1:
-            console.log("Scene1");
+            console.log("Scene 1");
             s2Timer = 0;
             drawTrail(trail, spotSize);
             break;
         case 2:
-            console.log("Scene2");
+            console.log("Scene 2");
             var s2Trail = [];
             var staticPos = createVector(width - 150, 150);
             for (var i = 0; i < trail.length; i++) {
@@ -59,10 +68,21 @@ function draw() {
                 var newOppSize = spotSize * cos(0.03 * timer);
                 drawTrail(s2Trail, newOppSize);
             }
-
             s2Timer++;
             break;
-
+        case 3:
+            console.log("Scene 3");
+            var s2Trail = [];
+            var staticPos = createVector(width - 150, 150);
+            for (var i = 0; i < trail.length; i++) {
+                s2Trail.push(staticPos);
+            }
+            var newOppSize = spotSize * cos(0.03 * timer);
+            drawTrail(s2Trail, newOppSize);
+            s2Timer = 0;
+            pSystem.addParticle(mousePos);
+            pSystem.run();
+            break;
     }
 
     timer += 1;
@@ -88,10 +108,11 @@ function drawOppositeTrail(trail, size) {
 function keyTyped() {
     if (key === 'q') {
         onScene = 0;
-
     } else if (key === 'a') {
         onScene = 1;
     } else if (key === 'b') {
         onScene = 2;
+    } else if (key === 'c') {
+        onScene = 3;
     }
 }
