@@ -16,7 +16,6 @@
 // var pSystem;
 // var fallingParticleSize = 40;
 
-
 var jmouseX, jmouseY;
 var e = window.event;
 document.onmousemove = function(e) {
@@ -29,9 +28,17 @@ var geometry, material, mesh;
 
 var zPosition;
 
+function setup() {
+
+}
+
+function draw() {
+
+}
+
 function init() {
 
-    createCanvas(windowWidth, windowHeight);
+    //createCanvas(windowWidth, windowHeight);
     // pSystem = new ParticleSystem(createVector(0, 0));
 
     if (!Detector.webgl) {
@@ -63,10 +70,18 @@ function init() {
 
     material = new THREE.RawShaderMaterial({
         uniforms: {
-            map: { value: new THREE.TextureLoader().load("assets/circle2.png") },
-            time: { value: 0.0 },
-            mousex: { value: 1.0 },
-            mousey: { value: 1.0 }
+            map: {
+                value: new THREE.TextureLoader().load("assets/circle2.png")
+            },
+            time: {
+                value: 0.0
+            },
+            mousex: {
+                value: 1.0
+            },
+            mousey: {
+                value: 1.0
+            }
         },
         vertexShader: document.getElementById('vshader').textContent,
         fragmentShader: document.getElementById('fshader').textContent,
@@ -82,7 +97,7 @@ function init() {
     container.appendChild(renderer.domElement);
 
 
-	createCanvas(windowWidth, windowHeight);
+    //createCanvas(windowWidth, windowHeight);
     window.addEventListener('resize', onWindowResize, false);
     return true;
 }
@@ -135,8 +150,6 @@ if (init()) {
 
 function keyTyped() {
     if (key === 'q') {
-       console.log("typed q p5 yay");
-    } 
+        console.log("typed q p5 yay");
+    }
 }
-
-
