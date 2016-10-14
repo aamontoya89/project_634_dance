@@ -20,7 +20,8 @@ function preload() {
 function setup() {
 
   //createfullscreen canvas
-  mainCanvas = createCanvas(1400, 800);
+  //mainCanvas = createCanvas(1400, 800);
+  mainCanvas = createCanvas(windowWidth, windowHeight);
 
   //set canvas position
   mainCanvas.parent("mainDiv");

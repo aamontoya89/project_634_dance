@@ -180,10 +180,10 @@ function displayCurrentVisuals() {
         if (currentSecond >= 55) {
           lookAtWindow();
 
-        } else if (currentSecond >= 30) {
+        } else if (currentSecond >= 50) {
             spotlight();
 
-        } else if (currentSecond >= 15) {
+        } else if (currentSecond >= 30) {
             //goes to the window
 
             lookAtWindow();

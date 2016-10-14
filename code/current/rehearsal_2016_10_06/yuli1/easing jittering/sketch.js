@@ -7,7 +7,7 @@ var targetY = 0;
 var trail = [];
 var easing = 0.1;
 var trailAmount = 10;
-var spotSize = 20;
+var spotSize = 40;
 var onScene = 0;
 var timer = 0;
 var mousePos;
@@ -21,7 +21,8 @@ var pSystem;
 var fallingParticleSize = 40;
 
 function setup() {
-    createCanvas(1400, 800);
+    //createCanvas(1400, 800);
+    createCanvas(windowWidth, windowHeight);
     pSystem = new ParticleSystem(createVector(0, 0));
 }
 
