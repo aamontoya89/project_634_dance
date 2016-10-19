@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>easing without p5</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="./style.css">
+	//gl Reference incase AutoFormat method messed the organization of shader code
 
-
-	<script type="text/javascript" src="./libraries/particle.js"></script>
-	<script type="text/javascript" src="./libraries/three.js"></script>
-	<script type="text/javascript" src="./libraries/Detector.js"></script>
-		
-</head>
-<body>
-<script id="vshader" type="x-shader/x-vertex">
-		precision highp float; 
+	//<script id="vshader" type="x-shader/x-vertex">
+	precision highp float; 
 		uniform mat4 modelViewMatrix; 
 		uniform mat4 projectionMatrix; 
 		uniform float time; 
@@ -35,8 +22,8 @@
 		// vUv = cross(mvPosition.xyz,position)*mousex; 
 		vUv = uv; 
 		gl_Position = projectionMatrix * mvPosition; }
-	</script>
-	<script id="fshader" type="x-shader/x-fragment">
+	//</script>
+	//<script id="fshader" type="x-shader/x-fragment">
 		precision highp float; 
 		uniform sampler2D map; 
 		varying vec2 vUv; 
@@ -59,10 +46,4 @@
 			gl_FragColor= vec4( diffuseColor.xyz * HSLtoRGB(vec3(vScale/5.0, 1.0, 0.5)), diffuseColor.w );
 			if ( diffuseColor.w< 0.5 ) discard; 
 			} 
-	</script>
-	<script type="text/javascript" src= "./Utils.js"></script>
-	<script type="text/javascript" src="./app.js"></script>
-
-	<canvas id="thecanvas"></canvas>
-</body>
-</html>
+	//</script>

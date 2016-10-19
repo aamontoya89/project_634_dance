@@ -33,7 +33,26 @@ var Utils = {
             var mag = Math.sqrt(vec.y * vec.y + vec.x * vec.x);
         }
         return mag;
-    }
+    },
+    distVector: function(vec1, vec2) {
+        if (vec1.z != undefined && vec2.z != undefined) {
+            var dist = Math.sqrt(Math.pow((vec1.x - vec2.x), 2) + Math.pow((vec1.y - vec2.y), 2) + Math.pow((vec1.z - vec2.z), 2));
+        } else {
+            var dist = Math.sqrt(Math.pow((vec1.x - vec2.x), 2) + Math.pow((vec1.y - vec2.y), 2));
+        }
+        return dist;
+    },
+    divVector: function(vec, scalar) {
+        vec.x = vec.x / scalar;
+        vec.y = vec.y / scalar;
+        if (vec.z != undefined) {
+            vec.z = vec.z / scalar;
+        }
+        return vec;
+    },
+    random: function(min, max) {
+        return Math.random() * (max - min) + min;
+    },
 
 
 

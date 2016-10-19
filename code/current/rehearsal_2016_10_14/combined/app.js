@@ -25,7 +25,6 @@ document.onmousemove = function(e) {
 var container;
 var camera, scene, renderer;
 var geometry, material, mesh;
-
 var zPosition;
 
 function setup() {
