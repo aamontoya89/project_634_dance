@@ -1,0 +1,10 @@
+#thecanvas {
+
+    position: absolute;
+    z-index: 800;
+}
+
+#threeScene {
+    position: absolute;
+    z-index: 999;
+}
