@@ -14,12 +14,17 @@ performances: november 3,4,5 2016 at nyu tisch school of the arts
 
 ## technology
 
-macbook pro running a firefox browser and html page with the p5.js and three.js javascript libraries
+macbook pro running a firefox browser and html page with the p5.js and three.js javascript libraries.
+
+projectors:
+
+## thanks
+* thanks to nyu itp for support and materials
+* thanks to lisa jamhoury and shawn van every for kinectron
 
 ## to do
 
 possible additions:
-* biometric sensors on dancer
 * kinect
 * someone for documentation, video and sound
 
