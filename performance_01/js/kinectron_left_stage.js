@@ -1,42 +1,42 @@
 //retrieve canvas on html document by id
-var myCanvas = window.document.getElementById("kinectron_left_stage");
+var leftCanvas = window.document.getElementById("kinectron_left_stage");
 //retrieve the context of the canvas
-var context = myCanvas.getContext("2d");
+var leftContext = leftCanvas.getContext("2d");
 
 //define the variables for kinectron constructor
-var username = "kinectron";
-var host = "192.168.1.96";
-var port = "9001";
-var path = "/";
+var leftUsername = "kinectron";
+var leftHost = "172.16.244.185";
+var leftPort = "9001";
+var leftPath = "/";
 
 //declare kinectron variable
-var kinectron = null;
+var leftKinectron = null;
 
 //create kinectron object
-createKinectron();
+createLeftKinectron();
 
 //setup kinectron object
-setupKinectron();
+setupLeftKinectron();
 
-function createKinectron() {
+function createLeftKinectron() {
     //declare and define kinectron variable
-    kinectron = new Kinectron(username, { // username matches application display
-        "host": host, // host matches application display
-        "port": port, // port matches application display
-        "path": path
+    leftKinectron = new Kinectron(leftUsername, { // username matches application display
+        "host": leftHost, // host matches application display
+        "port": leftPort, // port matches application display
+        "path": leftPath
     });
 
-    kinectron.makeConnection();
+    leftKinectron.makeConnection();
 }
 
 //setup function for kinectron
-function setupKinectron() {
-    kinectron.setRGBCallback(drawFeed);
-    kinectron.setDepthCallback(drawFeed);
-    kinectron.setInfraredCallback(drawFeed);
+function setupLeftKinectron() {
+    leftKinectron.setRGBCallback(leftDrawFeed);
+    leftKinectron.setDepthCallback(leftDrawFeed);
+    leftKinectron.setInfraredCallback(leftDrawFeed);
 }
 
 //draw feed on the canvas
-function drawFeed(img) {
-    context.drawImage(img, 10, 10);
+function leftDrawFeed(img) {
+    leftContext.drawImage(img, 10, 10);
 }
