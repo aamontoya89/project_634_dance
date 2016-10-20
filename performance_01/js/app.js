@@ -36,8 +36,8 @@ document.onmousemove = function(e) {
 function init() {
     // console.log("init");
     thecanvas = document.getElementById('thecanvas');
-    thecanvas.setAttribute('width', window.innerWidth);
-    thecanvas.setAttribute('height', window.innerHeight);
+    //thecanvas.setAttribute('width', window.innerWidth);
+    //thecanvas.setAttribute('height', window.innerHeight);
     thecontext = thecanvas.getContext('2d');
     pSystem = new ParticleSystem({ x: 0, y: 0 }, thecontext);
 
