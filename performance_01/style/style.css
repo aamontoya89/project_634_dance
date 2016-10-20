@@ -1,6 +1,7 @@
 #thecanvas {
 
-    position: absolute;
+    /*position: absolute;*/
+    position: relative;
     z-index: 800;
 }
 

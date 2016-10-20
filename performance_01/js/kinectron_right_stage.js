@@ -1,5 +1,5 @@
 //retrieve canvas on html document by id
-var myCanvas = window.document.getElementById("myCanvas");
+var myCanvas = window.document.getElementById("kinectron_right_stage");
 //retrieve the context of the canvas
 var context = myCanvas.getContext("2d");
 

@@ -38,6 +38,8 @@ function init() {
     thecanvas = document.getElementById('thecanvas');
     //thecanvas.setAttribute('width', window.innerWidth);
     //thecanvas.setAttribute('height', window.innerHeight);
+    //thecanvas.setAttribute('width', 300);
+    //thecanvas.setAttribute('height', 300);
     thecontext = thecanvas.getContext('2d');
     pSystem = new ParticleSystem({ x: 0, y: 0 }, thecontext);
 
