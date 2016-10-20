@@ -1,42 +1,42 @@
 //retrieve canvas on html document by id
-var myCanvas = window.document.getElementById("kinectron_right_stage");
+var rightCanvas = window.document.getElementById("kinectron_right_stage");
 //retrieve the context of the canvas
-var context = myCanvas.getContext("2d");
+var rightContext = rightCanvas.getContext("2d");
 
 //define the variables for kinectron constructor
-var username = "kinectron";
-var host = "172.16.248.45";
-var port = "9001";
-var path = "/";
+var rightUsername = "kinectron";
+var rightHost = "172.16.248.45";
+var rightPort = "9001";
+var rightPath = "/";
 
 //declare kinectron variable
-var kinectron = null;
+var rightKinectron = null;
 
 //create kinectron object
-createKinectron();
+createRightKinectron();
 
 //setup kinectron object
-setupKinectron();
+setupRightKinectron();
 
-function createKinectron() {
+function createRightKinectron() {
     //declare and define kinectron variable
-    kinectron = new Kinectron(username, { // username matches application display
-        "host": host, // host matches application display
-        "port": port, // port matches application display
-        "path": path
+    rightKinectron = new Kinectron(rightUsername, { // username matches application display
+        "host": rightHost, // host matches application display
+        "port": rightPort, // port matches application display
+        "path": rightPath
     });
 
-    kinectron.makeConnection();
+    rightKinectron.makeConnection();
 }
 
 //setup function for kinectron
-function setupKinectron() {
-    kinectron.setRGBCallback(drawFeed);
-    kinectron.setDepthCallback(drawFeed);
-    kinectron.setInfraredCallback(drawFeed);
+function setupRightKinectron() {
+    rightKinectron.setRGBCallback(rightDrawFeed);
+    rightKinectron.setDepthCallback(rightDrawFeed);
+    rightKinectron.setInfraredCallback(rightDrawFeed);
 }
 
 //draw feed on the canvas
-function drawFeed(img) {
-    context.drawImage(img, 10, 10);
+function rightDrawFeed(img) {
+    rightContext.drawImage(img, 10, 10);
 }
