@@ -36,6 +36,7 @@ window.document.onkeyup = function(e) {
             spacePressed = false;
             console.log("reset");
             soundtrack.pause();
+            soundtrack.currentTime = 0;
         } else {
             spacePressed = false;
             console.log("p");
