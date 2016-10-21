@@ -5,7 +5,7 @@ var leftContext = leftCanvas.getContext("2d");
 
 //define the variables for kinectron constructor
 var leftUsername = "kinectron";
-var leftHost = "172.16.244.185";
+var leftHost = "172.17.75.184";
 var leftPort = "9001";
 var leftPath = "/";
 

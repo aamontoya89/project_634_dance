@@ -1,15 +1,18 @@
 //Based on Daniel Shiffman's nature of code example for P5.js
 
 //Declare a simple Particle class
-var Particle = function(position, ctx) {
+//acc should be between(-0.1,0.1)
+var Particle = function(position,col, acc,ctx) {
     // this.acc = createVector(-0.05, 0.05);
-    this.acc = { x: -0.05, y: 0.05 };
+    // this.acc = { x: -0.05, y: 0.05 };
+    this.acc = acc;
     // this.vel = createVector(random(-1, 1), random(-1, 0));
     this.vel = { x: Utils.random(-1, 1), y: Utils.random(-1, 1) };
     this.pos = position;
     this.lifespan = 255;
     this.r = fallingParticleSize / 2.0;
     this.context = ctx;
+    this.col = col;
 };
 
 Particle.prototype.run = function(particleSystem) {
@@ -87,7 +90,7 @@ Particle.prototype.display = function(ctx) {
     // ellipse(this.pos.x, this.pos.y, fallingParticleSize, fallingParticleSize);
     var ratioLifespan = this.lifespan / 255;
     ctx.save();
-    ctx.fillStyle = 'rgba(' + 255 + ',' + 255 + ',' + 255 + ',' + ratioLifespan + ')';
+    ctx.fillStyle = 'rgba(' + this.col.r + ',' + this.col.g + ',' + this.col.b + ',' + ratioLifespan + ')';
     ctx.beginPath();
     ctx.ellipse(this.pos.x, this.pos.y, fallingParticleSize, fallingParticleSize, 45 * Math.PI / 180, 0, 2 * Math.PI);
     ctx.fill();
@@ -109,8 +112,8 @@ var ParticleSystem = function(position, ctx) {
     this.context = ctx;
 };
 
-ParticleSystem.prototype.addParticle = function(pos) {
-    this.particles.push(new Particle(pos, this.context));
+ParticleSystem.prototype.addParticle = function(pos,col,acc) {
+    this.particles.push(new Particle(pos, col,acc,this.context));
 };
 
 ParticleSystem.prototype.run = function() {

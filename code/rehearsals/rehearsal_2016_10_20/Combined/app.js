@@ -1,3 +1,5 @@
+	var width = 400;
+	var height = 272;
 	var e = window.event;
 	var mouseX, mouseY;
 	//mouse position in canvas
@@ -17,7 +19,7 @@
 	var trail = [];
 	var easing = 0.1;
 	var trailAmount = 10;
-	var spotSize = 40;
+	var spotSize = 5;
 	var onScene = 0;
 	var timer = 0;
 	var mousePos;
@@ -26,22 +28,29 @@
 	//scene3 vars
 	//particle system
 	var pSystem;
-	var fallingParticleSize = 40;
+	var fallingParticleSize = 10;
+	var colorPalette = [
+	    { r: 254, g: 0, b: 4 },
+	    { r: 0, g: 234, b: 27 },
+	    { r: 0, g: 112, b: 252 },
+	    { r: 246, g: 249, b: 0 },
+	    { r: 251, g: 132, b: 0 },
+	    { r: 0, g: 241, b: 224 },
+	    { r: 0, g: 223, b: 92 }
+	]
+
 
 	var thecanvas, thecontext;
-
-
 	var container;
 	var camera, scene, renderer;
 	var geometry, material, mesh;
-
 	var zPosition;
 
 
 	function init() {
 	    thecanvas = document.getElementById('thecanvas');
-	    thecanvas.setAttribute('width', window.innerWidth);
-	    thecanvas.setAttribute('height', window.innerHeight);
+	    thecanvas.setAttribute('width', width);
+	    thecanvas.setAttribute('height', height);
 	    thecontext = thecanvas.getContext('2d');
 	    // thecontext.fillRect(0, 0, 300, 300);
 	    pSystem = new ParticleSystem({ x: 0, y: 0 }, thecontext);
@@ -58,7 +67,7 @@
 	    container = document.createElement('div');
 	    container.setAttribute('id', 'threeScene');
 	    document.body.appendChild(container);
-	    camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
+	    camera = new THREE.PerspectiveCamera(50, width / height, 1, 5000);
 	    zPosition = 1000;
 	    camera.position.z = zPosition;
 	    scene = new THREE.Scene();
@@ -91,18 +100,18 @@
 	    scene.add(mesh);
 	    renderer.setClearColor(0xffffff);
 	    renderer.setPixelRatio(window.devicePixelRatio);
-	    renderer.setSize(window.innerWidth, window.innerHeight);
+	    renderer.setSize(width, height);
 	    container.appendChild(renderer.domElement);
 
-	    window.addEventListener('resize', onWindowResize, false);
+	    // window.addEventListener('resize', onWindowResize, false);
 	    return true;
 	}
 
-	function onWindowResize(event) {
-	    camera.aspect = window.innerWidth / window.innerHeight;
-	    camera.updateProjectionMatrix();
-	    renderer.setSize(window.innerWidth, window.innerHeight);
-	}
+	// function onWindowResize(event) {
+	//     camera.aspect = window.innerWidth / window.innerHeight;
+	//     camera.updateProjectionMatrix();
+	//     renderer.setSize(window.innerWidth, window.innerHeight);
+	// }
 
 
 	window.addEventListener('keydown',
@@ -131,8 +140,8 @@
 	        jmouseY = evt.clientY;
 
 	    });
-	    thecontext.clearRect(0, 0, window.innerWidth, window.innerHeight);
-	    thecontext.fillRect(0, 0, window.innerWidth, window.innerHeight);
+	    thecontext.clearRect(0, 0, width, height);
+	    thecontext.fillRect(0, 0, width, height);
 	    diffx = targetX - ballX; //what`s the different between mouse and the circle
 	    diffy = targetY - ballY;
 	    ballX = ballX + easing * diffx; //everytime catches a little bit more of the diff
@@ -155,11 +164,11 @@
 
 	            break;
 	        case 1:
-	            var introEllipseX = window.innerWidth - 150;
-	            var introEllipseY = window.innerHeight - 150;
+	            var introEllipseX = width - width / 6;
+	            var introEllipseY = height - width / 6;
 	            ellipse(thecontext, introEllipseX, introEllipseY, s0Timer, s0Timer);
-	            if (s0Timer < window.innerWidth / 4) {
-	                s0Timer += 1;
+	            if (s0Timer < spotSize * trailAmount) {
+	                s0Timer += 0.1;
 	            }
 	            break;
 	        case 2:
@@ -172,7 +181,7 @@
 	            console.log("Scene 3");
 	            s0Timer = 0;
 	            var s2Trail = [];
-	            var staticPos = { x: window.innerWidth - 150, y: 150 };
+	            var staticPos = { x: width - width / 6, y: width / 6 };
 	            for (var i = 0; i < trail.length; i++) {
 	                s2Trail.push(staticPos);
 	            }
@@ -191,16 +200,36 @@
 	            console.log("Scene 4");
 	            var s2Trail = [];
 	            // var staticPos = createVector(width - 150, 150);
-	            var staticPos = { x: window.innerWidth - 150, y: 150 };
+	            var staticPos = { x: width - width / 6, y: width / 6 };
 	            for (var i = 0; i < trail.length; i++) {
 	                s2Trail.push(staticPos);
 	            }
 	            var newOppSize = spotSize * Math.abs(Math.cos(0.03 * timer));
 	            drawTrail(thecontext, s2Trail, newOppSize);
 	            s2Timer = 0;
-	            pSystem.addParticle(mousePos);
+	            var s4Col = { r: 255, g: 255, b: 255 };
+	            var s4Acc = { x: -0.05, y: 0.05 };
+	            pSystem.addParticle(mousePos, s4Col,s4Acc);
 	            pSystem.run();
 	            break;
+	        case 5:
+	            console.log("Scene 5");
+	            s2Timer = 0;
+	            var s5Acc = {x: 0.05, y: -0.05 };
+	            var s5Col = { r: 255, g: 255, b: 255 };
+	            pSystem.addParticle(mousePos, s5Col,s5Acc);
+	            pSystem.run();
+	            break;
+	        case 6:
+	            console.log("Scene 6");
+	            s2Timer = 0;
+	            var s6Acc = { x:  0.1*Math.random(), y: -0.1*Math.random() };
+	            var s6Col = { r: Math.floor(255 * Math.random()) + 70, g: Math.floor(255 * Math.random()), b: Math.floor(255 * Math.random()) + 70 };
+	            var randomPos = { x: Math.floor(width * Math.random()), y: Math.floor(height * Math.random()) }
+	            pSystem.addParticle(mousePos, s6Col,s6Acc);
+	            pSystem.run();
+	            break;
+
 	    }
 	    // var newSize = spotSize * Math.abs(Math.sin(0.1 * timer));
 	    //  drawTrail(thecontext, trail, spotSize);
@@ -213,8 +242,8 @@
 	    var time = performance.now() * 0.0005;
 	    camera.position.z = zPosition;
 	    material.uniforms.time.value = time;
-	    material.uniforms.mousex.value = mouseX / window.innerWidth;
-	    material.uniforms.mousey.value = mouseY / window.innerHeight;
+	    material.uniforms.mousex.value = mouseX / width;
+	    material.uniforms.mousey.value = mouseY / height;
 	    mesh.rotation.x = time * 0.2;
 	    mesh.rotation.y = time * 0.4;
 	    renderer.render(scene, camera);
@@ -261,9 +290,15 @@
 	        onScene = 4;
 	    } else if (evt.keyCode == 53) {
 	        console.log("typing 5");
-	        $('#intro').removeClass('show').addClass('hide');
+	        onScene = 5;
 	    } else if (evt.keyCode == 54) {
 	        console.log("typing 6");
+	        onScene = 6;
+	    } else if (evt.keyCode == 55) {
+	        console.log("typing 7");
+	        $('#intro').removeClass('show').addClass('hide');
+	    } else if (evt.keyCode == 56) {
+	        console.log("typing 8");
 	        $('#intro').removeClass('hide').addClass('show');
 	    }
 
