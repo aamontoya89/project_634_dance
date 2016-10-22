@@ -1,11 +1,11 @@
 //retrieve canvas on html document by id
-var myCanvas = window.document.getElementById("myCanvas");
+var kinectronCanvas = window.document.getElementById("kinectronCanvas");
 //retrieve the context of the canvas
-var context = myCanvas.getContext("2d");
+var context = kinectronCanvas.getContext("2d");
 
 //define the variables for kinectron constructor
 var username = "kinectron";
-var host = "192.168.1.96";
+var host = "128.122.151.151";
 var port = "9001";
 var path = "/";
 
