@@ -34,7 +34,7 @@ Particle.prototype.run = function(particleSystem, centerActivated) {
     }
     this.handleForce(particleSystem);
     this.update();
-    this.borders();
+    // this.borders();
     this.display(this.context);
 };
 

@@ -5,7 +5,7 @@ var kinectContext = kinectronCanvas.getContext("2d");
 
 //define the variables for kinectron constructor
 var username = "kinectron";
-var host = "172.16.246.240";
+var host = "172.17.69.84";
 var port = "9001";
 var path = "/";
 
@@ -39,5 +39,5 @@ function setupKinectron() {
 //draw feed on the canvas
 function drawFeed(img) {
     console.log("Start drawing kinectron")
-    kinectContext.drawImage(img, 10, 10);
+    kinectContext.drawImage(img, 0, 0);
 }

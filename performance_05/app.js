@@ -1,6 +1,9 @@
-	var width = 400*1.02;
-	var height = 272*1.067;
-	var widthTHREEJS = 400;
+	// var width = 400*1.02;
+	// var height = 272*1.067;
+	//width:height = 20:16
+	var width = 340;
+	var height = 272;
+	var widthTHREEJS = 340;
 	var heightTHREEJS = 272;
 	var e = window.event;
 	var mouseX, mouseY;
@@ -207,7 +210,7 @@
 	            var introEllipseY = height - width / 6;
 	            ellipse(thecontext, introEllipseX, introEllipseY, s0Timer, s0Timer);
 	            if (s0Timer < spotSize * trailAmount) {
-	                s0Timer += 0.03;
+	                s0Timer += 0.0225;
 	            }
 	            break;
 	        case 2:
