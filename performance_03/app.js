@@ -1,5 +1,7 @@
-	var width = 400;
-	var height = 272;
+	var width = 400*1.02;
+	var height = 272*1.067;
+	var widthTHREEJS = 400;
+	var heightTHREEJS = 272;
 	var e = window.event;
 	var mouseX, mouseY;
 	//mouse position in canvas
@@ -112,7 +114,7 @@
 	    container = document.createElement('div');
 	    container.setAttribute('id', 'threeScene');
 	    document.body.appendChild(container);
-	    camera = new THREE.PerspectiveCamera(50, width / height, 1, 5000);
+	    camera = new THREE.PerspectiveCamera(50, widthTHREEJS / heightTHREEJS, 1, 5000);
 	    zPosition = 1000;
 	    camera.position.z = zPosition;
 	    scene = new THREE.Scene();
@@ -151,7 +153,7 @@
 	    scene.add(mesh);
 	    renderer.setClearColor(0xffffff);
 	    renderer.setPixelRatio(window.devicePixelRatio);
-	    renderer.setSize(width, height);
+	    renderer.setSize(widthTHREEJS, heightTHREEJS);
 	    container.appendChild(renderer.domElement);
 	    // window.addEventListener('resize', onWindowResize, false);
 	    return true;
@@ -347,8 +349,8 @@
 	    var time = performance.now() * 0.0005;
 	    camera.position.z = zPosition;
 	    material.uniforms.time.value = time;
-	    material.uniforms.mousex.value = mouseX / width;
-	    material.uniforms.mousey.value = mouseY / height;
+	    material.uniforms.mousex.value = mouseX / widthTHREEJS;
+	    material.uniforms.mousey.value = mouseY / heightTHREEJS;
 	    mesh.rotation.x = time * 0.2;
 	    mesh.rotation.y = time * 0.4;
 	    renderer.render(scene, camera);
