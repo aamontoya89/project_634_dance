@@ -87,6 +87,12 @@
 	    thecanvas.setAttribute('height', height);
 	    thecontext = thecanvas.getContext('2d');
 
+	    //setup kinectron canvas size
+	    kinectronCanvas.setAttribute('width', width);
+	    kinectronCanvas.setAttribute('height', height);
+	    //hide kinectron canvas at the beginning of times
+	    $('#kinectron').removeClass('show').addClass('hide');
+
 	    //declare particle system
 	    pSystem = new ParticleSystem({
 	        x: 0,
@@ -180,7 +186,6 @@
 	    mousePos = {};
 	    mousePos.x = jmouseX;
 	    mousePos.y = jmouseY;
-
 
 	    /*
 	     * IMPORTANT * Scenes control content
@@ -406,20 +411,20 @@
 	        onScene = 7;
 	    } else if (evt.keyCode == 56) {
 	        console.log("typing 8");
-					onScene = 0;
+	        onScene = 0;
 	        $('#intro').removeClass('show').addClass('hide');
 	        $('#kinectron').removeClass('hide').addClass('show');
 	    } else if (evt.keyCode == 57) {
 	        console.log("typing 9");
-					onScene = 0;
+	        onScene = 0;
 	        $('#kinectron').removeClass('show').addClass('hide');
 	    } else if (evt.keyCode == 90) {
 	        console.log("typing z");
-					onScene = 0;
+	        onScene = 0;
 	        $('#intro').removeClass('show').addClass('hide');
 	    } else if (evt.keyCode == 88) {
 	        console.log("typing x");
-					onScene = 0;
+	        onScene = 0;
 	        $('#intro').removeClass('hide').addClass('show');
 	    }
 

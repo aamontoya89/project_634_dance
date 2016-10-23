@@ -1,7 +1,7 @@
 //retrieve canvas on html document by id
 var kinectronCanvas = window.document.getElementById("kinectronCanvas");
 //retrieve the context of the canvas
-var kinectContext = kinectronCanvas.getContext("2d");
+var kinectronContext = kinectronCanvas.getContext("2d");
 
 //define the variables for kinectron constructor
 var username = "kinectron";
@@ -38,6 +38,6 @@ function setupKinectron() {
 
 //draw feed on the canvas
 function drawFeed(img) {
-    console.log("Start drawing kinectron")
-    kinectContext.drawImage(img, 10, 10);
+    console.log("start drawing kinectron")
+    kinectronContext.drawImage(img, 10, 10);
 }
