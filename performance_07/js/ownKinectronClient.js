@@ -85,7 +85,7 @@ function setupKinectrons() {
 
 //draw feed on the canvas
 function leftDrawFeed(img) {
-    console.log("start drawing left kinectron")
+
 
     if (leftIsFirstTime) {
         for (var i = 0; i < lengthPrerecord; i++) {
@@ -123,7 +123,6 @@ function leftDrawFeed(img) {
 }
 
 function rightDrawFeed(img) {
-    console.log("start drawing right kinectron")
 
     if (rightIsFirstTime) {
         for (var i = 0; i < lengthPrerecord; i++) {
@@ -151,10 +150,11 @@ function rightDrawFeed(img) {
         // 0.21 R + 0.72 G + 0.07 B
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
         if (grayScale > 100) {
-            // drawEllipse(context2,x,y,pixR,pixG,pixB,2);
+
             drawEllipse(rightKinectContext, x, y, 255, 255, 255, 2);
         } else {
             drawEllipse(rightKinectContext, x, y, 0, 0, 0, 1);
+
         }
     }
     // kinectContext.drawImage(img, 0, 0);

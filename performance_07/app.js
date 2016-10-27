@@ -113,8 +113,14 @@
 	    //hide kinectron canvas at the beginning of times
 	    $('#leftKinectron').removeClass('showhalf').addClass('hide');
 			$('#rightKinectron').removeClass('showHalf').addClass('hide');
-	    //leftKinectContext.fillRect(0, 0, width, height);
-	    //rightKinectContext.fillRect(0, 0, width, height);
+			// leftKinectContext.save();
+			// rightKinectContext.save();
+			leftKinectContext.fillStyle="#ffffff";
+			rightKinectContext.fillStyle="#ffffff";
+	    leftKinectContext.fillRect(0, 0, width, height);
+	    rightKinectContext.fillRect(0, 0, width, height);
+			// leftKinectContext.restore();
+			// rightKinectContext.restore();
 
 	    leftKinectron.startDepth();
 	    rightKinectron.startDepth();
@@ -194,6 +200,13 @@
 	        jmouseY = evt.clientY;
 
 	    });
+
+			// leftKinectContext.fillStyle="#ffffff";
+			// rightKinectContext.fillStyle="#ffffff";
+	    // leftKinectContext.fillRect(0, 0, width, height);
+	    // rightKinectContext.fillRect(0, 0, width, height);
+
+
 	    thecontext.clearRect(0, 0, width, height);
 	    thecontext.fillRect(0, 0, width, height);
 	    diffx = targetX - ballX; //what`s the different between mouse and the circle
