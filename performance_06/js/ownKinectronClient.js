@@ -1,4 +1,8 @@
-var canvasData;
+//retrieve canvas on html document by id
+var kinectronCanvas = window.document.getElementById("kinectronCanvas");
+//retrieve the context of the canvas
+var kinectContext = kinectronCanvas.getContext("2d");
+
 //define the variables for kinectron constructor
 var username = "kinectron";
 var host = "172.16.242.210";
@@ -8,10 +12,17 @@ var path = "/";
 //declare kinectron variable
 var kinectron = null;
 
-var kinectronCanvas, kinectronCanvas2;
-var context, context2;
-
+// //create kinectron object
+// createKinectron();
+//
+// //setup kinectron object
+// setupKinectron();
 var currentDepthImg;
+var prerecordImgs = [];
+var lengthPrerecord = 20;
+var isImageNew = false;
+var isFirstTime = true;
+var canvasData;
 
 function createKinectron() {
     //declare and define kinectron variable
@@ -24,50 +35,44 @@ function createKinectron() {
     kinectron.makeConnection();
 }
 
+function addImg(img) {
+    currentDepthImg = img;
+    isImageNew = true;
+    prerecordImgs.push(img);
+    while (prerecordImgs.length > lengthPrerecord) {
+        prerecordImgs.splice(0, 1);
+    }
+}
+
 //setup function for kinectron
 function setupKinectron() {
-    // kinectron.setRGBCallback(drawFeed);
-
-    // kinectron.setInfraredCallback(drawFeed);
-    //kinectron.setDepthCallback(drawFeed);
-    kinectron.setDepthCallback(updateImg);
-
-}
-
-function init() {
-    currentDepthImg = new Image();
-    //create kinectron object
-    createKinectron();
-    //retrieve canvas on html document by id
-    kinectronCanvas = window.document.getElementById("kinectronCanvas");
-    //retrieve the context of the canvas
-    context = kinectronCanvas.getContext("2d");
-
-    //retrieve canvas on html document by id
-    kinectronCanvas2 = window.document.getElementById("kinectronCanvas2");
-    //retrieve the context of the canvas
-    context2 = kinectronCanvas2.getContext("2d");
-
-    kinectron.startDepth();
-    //setup kinectron object
-    setupKinectron();
-    loop();
-}
-
-function loop() {
-
-    drawFeed(currentDepthImg);
-    requestAnimationFrame(loop);
-}
-
-function updateImg(img) {
-    currentDepthImg = img;
+    kinectron.setRGBCallback(addImg);
+    kinectron.setDepthCallback(addImg);
+    kinectron.setInfraredCallback(addImg);
 }
 
 //draw feed on the canvas
 function drawFeed(img) {
-    context.drawImage(img, 10, 10);
-    canvasData = context.getImageData(0, 0, 500, 500);
+    console.log("Start drawing kinectron")
+
+
+    if (isFirstTime) {
+        for (var i = 0; i < lengthPrerecord; i++) {
+            prerecordImgs.push(img);
+        }
+
+    } else {
+        if (isImageNew) {
+            tempKinectronContext.drawImage(img, 10, 10);
+        } else {
+            tempKinectronContext.drawImage(prerecordImgs[prerecordImgs.length - 1], 10, 10);
+        }
+
+        isImageNew = false;
+    }
+
+    isFirstTime = false;
+    canvasData = tempKinectronContext.getImageData(0, 0, 340, 272);
     for (var n = 0; n < 2000; n++) {
         var x = Math.floor(Math.random() * canvasData.width);
         var y = Math.floor(Math.random() * canvasData.height);
@@ -79,11 +84,12 @@ function drawFeed(img) {
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
         if (grayScale > 100) {
             // drawEllipse(context2,x,y,pixR,pixG,pixB,2);
-            drawEllipse(context2, x, y, 255, 255, 255, 2);
+            drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
         } else {
-            drawEllipse(context2, x, y, 0, 0, 0, 1);
+            drawEllipse(kinectContext, x, y, 0, 0, 0, 1);
         }
     }
+    // kinectContext.drawImage(img, 0, 0);
 }
 
 function drawEllipse(ctx, _x, _y, r, g, b, size) {
@@ -94,6 +100,3 @@ function drawEllipse(ctx, _x, _y, r, g, b, size) {
     ctx.fill();
     ctx.restore();
 }
-
-
-window.addEventListener('load', init);

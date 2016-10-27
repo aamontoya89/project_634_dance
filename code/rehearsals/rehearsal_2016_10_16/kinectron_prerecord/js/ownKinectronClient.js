@@ -13,6 +13,11 @@ var context, context2;
 
 var currentDepthImg;
 
+var prerecordImgs = [];
+var lengthPrerecord = 20;
+var isImageNew = false;
+var isFirstTime = true;
+
 function createKinectron() {
     //declare and define kinectron variable
     kinectron = new Kinectron(username, { // username matches application display
@@ -26,15 +31,14 @@ function createKinectron() {
 
 //setup function for kinectron
 function setupKinectron() {
-    // kinectron.setRGBCallback(drawFeed);
 
-    // kinectron.setInfraredCallback(drawFeed);
-    //kinectron.setDepthCallback(drawFeed);
-    kinectron.setDepthCallback(updateImg);
+    kinectron.setDepthCallback(addImg);
 
 }
 
 function init() {
+
+
     currentDepthImg = new Image();
     //create kinectron object
     createKinectron();
@@ -60,13 +64,35 @@ function loop() {
     requestAnimationFrame(loop);
 }
 
-function updateImg(img) {
+function addImg(img) {
     currentDepthImg = img;
+    isImageNew = true;
+    prerecordImgs.push(img);
+    while (prerecordImgs.length > lengthPrerecord) {
+      prerecordImgs.splice(0, 1);
+    }
 }
 
 //draw feed on the canvas
 function drawFeed(img) {
-    context.drawImage(img, 10, 10);
+
+  if (isFirstTime) {
+    for (var i = 0; i < lengthPrerecord; i++) {
+      prerecordImgs.push(img);
+    }
+
+  } else {
+    if (isImageNew) {
+        context.drawImage(img, 10, 10);
+    } else {
+      context.drawImage(prerecordImgs[prerecordImgs.length-1],10,10);
+    }
+
+    isImageNew = false;
+  }
+
+  isFirstTime = false;
+
     canvasData = context.getImageData(0, 0, 500, 500);
     for (var n = 0; n < 2000; n++) {
         var x = Math.floor(Math.random() * canvasData.width);
