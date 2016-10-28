@@ -89,6 +89,7 @@
 	//init only happenes once, as the set up
 	function init() {
 	    leftCurrentDepthImg = new Image();
+			rightCurrentDepthImg = new Image();
 	    //create kinectron object
 	    createKinectrons();
 
@@ -106,19 +107,16 @@
 
 
 	    //setup kinectron canvas size
-	    leftKinectronCanvas.setAttribute('width', width);
-	    leftKinectronCanvas.setAttribute('height', height);
-	    rightKinectronCanvas.setAttribute('width', width);
-	    rightKinectronCanvas.setAttribute('height', height);
+	    kinectronCanvas.setAttribute('width', width);
+	    kinectronCanvas.setAttribute('height', height);
 	    //hide kinectron canvas at the beginning of times
 	    $('#leftKinectron').removeClass('showhalf').addClass('hide');
 			$('#rightKinectron').removeClass('showHalf').addClass('hide');
 			// leftKinectContext.save();
 			// rightKinectContext.save();
-			leftKinectContext.fillStyle="#ffffff";
-			rightKinectContext.fillStyle="#ffffff";
-	    leftKinectContext.fillRect(0, 0, width, height);
-	    rightKinectContext.fillRect(0, 0, width, height);
+			kinectContext.fillStyle="#ffffff";
+
+	    kinectContext.fillRect(0, 0, width, height);
 			// leftKinectContext.restore();
 			// rightKinectContext.restore();
 

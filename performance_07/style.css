@@ -17,15 +17,7 @@
     height: 100%;
 }
 
-#leftKinectron {
-    position: absolute;
-    top: 26px;
-    left: 8px;
-    width: 100%;
-    height: 100%;
-}
-
-#rightKinectron {
+#kinectron {
     position: absolute;
     top: 26px;
     left: 8px;

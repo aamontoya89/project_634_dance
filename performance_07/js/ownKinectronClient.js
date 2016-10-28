@@ -1,9 +1,7 @@
 //retrieve canvas on html document by id
-var leftKinectronCanvas=window.document.getElementById("leftKinectronCanvas");
-var rightKinectronCanvas=window.document.getElementById("rightKinectronCanvas");
+var kinectronCanvas=window.document.getElementById("kinectronCanvas");
 //retrieve the context of the canvas
-var leftKinectContext = leftKinectronCanvas.getContext("2d");
-var rightKinectContext = rightKinectronCanvas.getContext("2d");
+var kinectContext = kinectronCanvas.getContext("2d");
 
 //define the variables for kinectron constructor
 var leftUsername = "kinectron";
@@ -114,9 +112,9 @@ function leftDrawFeed(img) {
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
         if (grayScale > 100) {
             // drawEllipse(context2,x,y,pixR,pixG,pixB,2);
-            drawEllipse(leftKinectContext, x, y, 255, 255, 255, 2);
+            drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
         } else {
-            drawEllipse(leftKinectContext, x, y, 0, 0, 0, 1);
+            drawEllipse(kinectContext, x, y, 0, 0, 0, 1);
         }
     }
     // kinectContext.drawImage(img, 0, 0);
@@ -151,9 +149,9 @@ function rightDrawFeed(img) {
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
         if (grayScale > 100) {
 
-            drawEllipse(rightKinectContext, x, y, 255, 255, 255, 2);
+            drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
         } else {
-            drawEllipse(rightKinectContext, x, y, 0, 0, 0, 1);
+            drawEllipse(kinectContext, x, y, 0, 0, 0, 1);
 
         }
     }
