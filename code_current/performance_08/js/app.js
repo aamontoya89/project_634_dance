@@ -106,7 +106,6 @@ function init() {
     rightTempKinectronCanvas = document.getElementById('rightTempKinectronCanvas');
     rightTempKinectronContext = rightTempKinectronCanvas.getContext('2d');
 
-
     //setup kinectron canvas size
     kinectronCanvas.setAttribute('width', width);
     kinectronCanvas.setAttribute('height', height);
@@ -118,8 +117,7 @@ function init() {
     kinectContext.fillStyle = "#ffffff";
 
     kinectContext.fillRect(0, 0, width, height);
-    // leftKinectContext.restore();
-    // rightKinectContext.restore();
+    //kinectContext.restore();
 
     leftKinectron.startDepth();
     rightKinectron.startDepth();
@@ -385,47 +383,12 @@ function animate() {
 
 }
 
-function render() {
-    var time = performance.now() * 0.0005;
-    camera.position.z = zPosition;
-    material.uniforms.time.value = time;
-    material.uniforms.mousex.value = mouseX / widthTHREEJS;
-    material.uniforms.mousey.value = mouseY / heightTHREEJS;
-    mesh.rotation.x = time * 0.2;
-    mesh.rotation.y = time * 0.4;
-    renderer.render(scene, camera);
-}
-if (init()) {
-    animate();
-}
-
-function drawTrail(ctx, trail, size) {
-    for (var i = 0; i < trail.length; i++) {
-        ctx.save();
-        ctx.fillStyle = 'rgba(' + 255 + ',' + 255 + ',' + 255 + ',' + 0.5 + ')';
-        ctx.beginPath();
-        ctx.ellipse(trail[i].x, trail[i].y, size * (i + 1), size * (i + 1), 45 * Math.PI / 180, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.restore();
-    }
-}
-
-function ellipse(ctx, _x, _y, size, size) {
-    ctx.save();
-    ctx.fillStyle = 'rgb(' + 255 + ',' + 255 + ',' + 255 + ')';
-    ctx.beginPath();
-    ctx.ellipse(_x, _y, size, size, 45 * Math.PI / 180, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.restore();
-}
-
-
 //0 = 48; 1=49...9=57, a=65
 //0-7 controls different scenes list above
-//8 should trigger kinect feed
-//9 should hide kinect feed
-//lower case z should hide all the canvases and show three.js scenes
-//lower case x should show back the canvas(canvases)
+//8 triggers kinect feed
+//9 hides kinect feed
+//lower case z hides all the canvases and show three.js scenes
+//lower case x shows back the canvas(canvases)
 window.addEventListener('keydown', function(evt) {
     if (evt.keyCode == 48) {
         console.log("typing 0");
@@ -462,7 +425,7 @@ window.addEventListener('keydown', function(evt) {
         console.log("typing 9");
         onScene = 0;
         $('#leftKinectron').removeClass('showHalf').addClass('hide');
-        $('#leftKinectron').removeClass('showHalf').addClass('hide');
+        $('#rightKinectron').removeClass('showHalf').addClass('hide');
     } else if (evt.keyCode == 90) {
         console.log("typing z");
         onScene = 0;
@@ -473,24 +436,58 @@ window.addEventListener('keydown', function(evt) {
         $('#intro').removeClass('hide').addClass('show');
     }
 
-}, true)
+}, true);
 
-window.addEventListener('keydown',
-    function(evt) {
-        if (evt.key == 'ArrowUp') {
-            zPosition = 2000;
-        }
-        if (evt.key == 'ArrowDown') {
-            zPosition = 200;
-        }
-        if (evt.key == 'ArrowLeft') {
-            zPosition += 200;
-        }
-        if (evt.key == 'ArrowRight') {
-            zPosition -= 200;
-        }
 
-    });
+function render() {
+    var time = performance.now() * 0.0005;
+    camera.position.z = zPosition;
+    material.uniforms.time.value = time;
+    material.uniforms.mousex.value = mouseX / widthTHREEJS;
+    material.uniforms.mousey.value = mouseY / heightTHREEJS;
+    mesh.rotation.x = time * 0.2;
+    mesh.rotation.y = time * 0.4;
+    renderer.render(scene, camera);
+}
+if (init()) {
+    animate();
+}
+
+function drawTrail(ctx, trail, size) {
+    for (var i = 0; i < trail.length; i++) {
+        ctx.save();
+        ctx.fillStyle = 'rgba(' + 255 + ',' + 255 + ',' + 255 + ',' + 0.5 + ')';
+        ctx.beginPath();
+        ctx.ellipse(trail[i].x, trail[i].y, size * (i + 1), size * (i + 1), 45 * Math.PI / 180, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+function ellipse(ctx, _x, _y, size, size) {
+    ctx.save();
+    ctx.fillStyle = 'rgb(' + 255 + ',' + 255 + ',' + 255 + ')';
+    ctx.beginPath();
+    ctx.ellipse(_x, _y, size, size, 45 * Math.PI / 180, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.restore();
+}
+
+window.addEventListener('keydown', function(evt) {
+    if (evt.key == 'ArrowUp') {
+        zPosition = 2000;
+    }
+    if (evt.key == 'ArrowDown') {
+        zPosition = 200;
+    }
+    if (evt.key == 'ArrowLeft') {
+        zPosition += 200;
+    }
+    if (evt.key == 'ArrowRight') {
+        zPosition -= 200;
+    }
+
+});
 // function onWindowResize(event) {
 //     camera.aspect = window.innerWidth / window.innerHeight;
 //     camera.updateProjectionMatrix();

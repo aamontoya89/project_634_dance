@@ -3,7 +3,6 @@ var kinectronCanvas=window.document.getElementById("kinectronCanvas");
 //retrieve the context of the canvas
 var kinectContext = kinectronCanvas.getContext("2d");
 
-
 //grayscale threshold
 var grayscaleThreshold = 200;
 
