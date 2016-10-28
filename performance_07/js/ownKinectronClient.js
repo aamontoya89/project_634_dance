@@ -110,7 +110,7 @@ function leftDrawFeed(img) {
         var pixB = leftCanvasData.data[pixIndex * 4 + 2];
         // 0.21 R + 0.72 G + 0.07 B
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
-        if (grayScale > 100) {
+        if (grayScale > 200) {
             // drawEllipse(context2,x,y,pixR,pixG,pixB,2);
             drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
         } else {
@@ -147,7 +147,7 @@ function rightDrawFeed(img) {
         var pixB = rightCanvasData.data[pixIndex * 4 + 2];
         // 0.21 R + 0.72 G + 0.07 B
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
-        if (grayScale > 100) {
+        if (grayScale > 200) {
 
             drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
         } else {
@@ -160,7 +160,7 @@ function rightDrawFeed(img) {
 
 function drawEllipse(ctx, _x, _y, r, g, b, size) {
     ctx.save();
-    ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',0.3)';
+    ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',0.8)';
     ctx.beginPath();
     ctx.ellipse(_x, _y, size, size, 45 * Math.PI / 180, 0, 2 * Math.PI);
     ctx.fill();
