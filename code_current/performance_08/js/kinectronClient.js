@@ -3,6 +3,10 @@ var kinectronCanvas=window.document.getElementById("kinectronCanvas");
 //retrieve the context of the canvas
 var kinectContext = kinectronCanvas.getContext("2d");
 
+
+//grayscale threshold
+var grayscaleThreshold = 200;
+
 //define the variables for kinectron constructor
 var leftUsername = "kinectron";
 var leftHost = "172.16.251.69";
@@ -110,7 +114,7 @@ function leftDrawFeed(img) {
         var pixB = leftCanvasData.data[pixIndex * 4 + 2];
         // 0.21 R + 0.72 G + 0.07 B
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
-        if (grayScale > 200) {
+        if (grayScale > grayscaleThreshold) {
             // drawEllipse(context2,x,y,pixR,pixG,pixB,2);
             drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
         } else {
@@ -147,7 +151,7 @@ function rightDrawFeed(img) {
         var pixB = rightCanvasData.data[pixIndex * 4 + 2];
         // 0.21 R + 0.72 G + 0.07 B
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
-        if (grayScale > 200) {
+        if (grayScale > grayscaleThreshold) {
 
             drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
         } else {
