@@ -5,6 +5,10 @@
 //uses p5.js library
 //october 2016
 
+//variable for storing the canvas
+var mainCanvas;
+var auxCanvas = document.getElementById("auxCanvas");
+
 //function for loading the assets
 function preload() {
   //load the sound file
@@ -14,16 +18,25 @@ function preload() {
 }
 
 function setup() {
-  //fullscreen
-  createCanvas(windowWidth, windowHeight);
+
+  //createfullscreen canvas
+  //mainCanvas = createCanvas(1400, 800);
+  mainCanvas = createCanvas(windowWidth, windowHeight);
+
+  //set canvas position
+  mainCanvas.parent("mainDiv");
+  //mainCanvas.position(0,0);
+
+  //set canvas class
+  mainCanvas.class("main");
 
   //loadInfo of the scenes
   loadInfo();
 
   //don't show the mouse
-  noCursor();
+  //noCursor();
 
-  //white background
+  //black background
   background(0);
 
   //playback the soundtrack
@@ -48,11 +61,11 @@ function draw() {
     //time retrieval
     timeRetrieval();
 
-    //display info on screen
-    infoOnScreen();
-
     //display sceneVisuals
     displayCurrentVisuals();
+
+    //display info on screen
+    infoOnScreen();
 
   } else {
     background(0);

@@ -27,11 +27,13 @@ function displayInfo() {
   if (!hideInfo) {
     //display message on screen
     for (var i = 0; i < sceneInfo.length; i++) {
-      if (currentMinute >= sceneMinute[i] && currentSecond >= sceneSecond[i]) {
+      if (currentMinute == sceneMinute[i] && currentSecond == sceneSecond[i]) {
         infoDonald = sceneInfo[i];
         infoVisuals = sceneVisuals[i];
       }
     }
+    noStroke();
+    fill(255);
     //put the scene text on the screen
     text("donald: " + infoDonald, windowWidth / 5, windowHeight / 15);
     //put the visuals text on the screen
