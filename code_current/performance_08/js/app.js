@@ -417,8 +417,7 @@ window.addEventListener('keydown', function(evt) {
     } else if (evt.keyCode == 56) {
         console.log("typing 8");
         onScene = 8;
-        $('#intro').removeClass('show').addClass('hide');
-        // drawFeed(currentDepthImg);
+        $('#intro').removeClass('hide').addClass('show');
         $('#leftKinectron').removeClass('hide').addClass('showHalf');
         $('#rightKinectron').removeClass('hide').addClass('showHalf');
     } else if (evt.keyCode == 57) {
