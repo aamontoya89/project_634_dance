@@ -4,13 +4,13 @@
 	<title>three.js webgl - instanced particles - billboards - colors</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	 <link rel="stylesheet" href="./style/style.css"/>
+	 <link rel="stylesheet" href="style.css"/>
 
-	<script type="text/javascript" src="./libraries/particle.js"></script>
-	<script type="text/javascript" src= "./libraries/utils.js"></script>
-	<script type="text/javascript" src= "./libraries/jquery.js"></script>
+	<script type="text/javascript" src="./js/particle.js"></script>
+	<script type="text/javascript" src= "./js/Utils.js"></script>
+	<script type="text/javascript" src= "./js/jquery.js"></script>
 
-		<script src="./libraries/kinectron.bundle.js" type="text/javascript"></script>
+		<script src="./js/kinectron.bundle.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -29,8 +29,8 @@
 		<canvas id="thecanvas"></canvas>
 	</div>
 
-	<script src="./libraries/three.js"></script>
-	<script src="./libraries/Detector.js"></script>
+	<script src="js/three.js"></script>
+	<script src="js/Detector.js"></script>
 
 	<script id="vshader" type="x-shader/x-vertex">
 		precision highp float;
@@ -81,8 +81,10 @@
 			if ( diffuseColor.w < 0.5 ) discard;
 		}
 	</script>
-<script type="text/javascript" src= "./js/kinectronClient.js"></script>
-<script type="text/javascript" src="./js/app.js"></script>
+<script type="text/javascript" src= "./js/ownKinectronClient.js"></script>
+<script type="text/javascript" src="app.js"></script>
+
+
 
 </body>
 </html>

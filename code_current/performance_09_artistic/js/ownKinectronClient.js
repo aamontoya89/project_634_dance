@@ -1,10 +1,7 @@
 //retrieve canvas on html document by id
-var kinectronCanvas=window.document.getElementById("kinectronCanvas");
+var kinectronCanvas = window.document.getElementById("kinectronCanvas");
 //retrieve the context of the canvas
 var kinectContext = kinectronCanvas.getContext("2d");
-
-//grayscale threshold
-var grayscaleThreshold = 200;
 
 //define the variables for kinectron constructor
 var leftUsername = "kinectron";
@@ -34,6 +31,11 @@ var rightPrerecord = [];
 var rightIsImageNew = false;
 var rightIsFirstTime = true;
 var righCanvasData;
+
+var brightnessThreshold = 150;
+var edgeThreshold = 300;
+
+var edgeMode = 0;
 
 
 function createKinectrons() {
@@ -84,81 +86,82 @@ function setupKinectrons() {
     rightKinectron.setInfraredCallback(rightAddImg);
 }
 
-//draw feed on the canvas
-function leftDrawFeed(img) {
-
-
+function drawFeed(leftImg, rightImg) {
     if (leftIsFirstTime) {
         for (var i = 0; i < lengthPrerecord; i++) {
-            leftPrerecord.push(img);
+            leftPrerecord.push(leftImg);
         }
     } else {
         if (leftIsImageNew) {
-            leftTempKinectronContext.drawImage(img, 10, 10);
+            leftTempKinectronContext.drawImage(leftImg, 10, 10);
         } else {
             leftTempKinectronContext.drawImage(leftPrerecord[leftPrerecord.length - 1], 10, 10);
         }
-
         leftIsImageNew = false;
     }
 
-    leftIsFirstTime = false;
-    leftCanvasData = leftTempKinectronContext.getImageData(0, 0, 340, 272);
-    for (var n = 0; n < 2000; n++) {
-        var x = Math.floor(Math.random() * leftCanvasData.width);
-        var y = Math.floor(Math.random() * leftCanvasData.height);
-        var pixIndex = y * leftCanvasData.width + x;
-        var pixR = leftCanvasData.data[pixIndex * 4 + 0];
-        var pixG = leftCanvasData.data[pixIndex * 4 + 1];
-        var pixB = leftCanvasData.data[pixIndex * 4 + 2];
-        // 0.21 R + 0.72 G + 0.07 B
-        var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
-        if (grayScale > grayscaleThreshold) {
-            // drawEllipse(context2,x,y,pixR,pixG,pixB,2);
-            drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
-        } else {
-            drawEllipse(kinectContext, x, y, 0, 0, 0, 1);
-        }
-    }
-    // kinectContext.drawImage(img, 0, 0);
-}
-
-function rightDrawFeed(img) {
-
     if (rightIsFirstTime) {
         for (var i = 0; i < lengthPrerecord; i++) {
-            rightPrerecord.push(img);
+            rightPrerecord.push(rightImg);
         }
     } else {
         if (rightIsImageNew) {
-            rightTempKinectronContext.drawImage(img, 10, 10);
+            rightTempKinectronContext.drawImage(rightImg, 10, 10);
         } else {
             rightTempKinectronContext.drawImage(rightPrerecord[leftPrerecord.length - 1], 10, 10);
         }
-
         rightIsImageNew = false;
     }
 
+    leftIsFirstTime = false;
     rightIsFirstTime = false;
     rightCanvasData = rightTempKinectronContext.getImageData(0, 0, 340, 272);
+    leftCanvasData = leftTempKinectronContext.getImageData(0, 0, 340, 272);
     for (var n = 0; n < 2000; n++) {
         var x = Math.floor(Math.random() * rightCanvasData.width);
         var y = Math.floor(Math.random() * rightCanvasData.height);
         var pixIndex = y * rightCanvasData.width + x;
-        var pixR = rightCanvasData.data[pixIndex * 4 + 0];
-        var pixG = rightCanvasData.data[pixIndex * 4 + 1];
-        var pixB = rightCanvasData.data[pixIndex * 4 + 2];
-        // 0.21 R + 0.72 G + 0.07 B
-        var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
-        if (grayScale > grayscaleThreshold) {
+        var rightPixR = rightCanvasData.data[pixIndex * 4 + 0];
+        var rightPixG = rightCanvasData.data[pixIndex * 4 + 1];
+        var rightPixB = rightCanvasData.data[pixIndex * 4 + 2];
+        var leftPixR = leftCanvasData.data[pixIndex * 4 + 0];
+        var leftPixG = leftCanvasData.data[pixIndex * 4 + 1];
+        var leftPixB = leftCanvasData.data[pixIndex * 4 + 2];
+        var pixR = rightPixR + leftPixR;
+        var pixG = rightPixG + leftPixG;
+        var pixB = rightPixB + leftPixB;
 
+        var neiborIndex = (y - 1) * rightCanvasData.width + x - 1;
+        var nrightPixR = rightCanvasData.data[neiborIndex * 4 + 0];
+        var nrightPixG = rightCanvasData.data[neiborIndex * 4 + 1];
+        var nrightPixB = rightCanvasData.data[neiborIndex * 4 + 2];
+        var nleftPixR = leftCanvasData.data[neiborIndex * 4 + 0];
+        var nleftPixG = leftCanvasData.data[neiborIndex * 4 + 1];
+        var nleftPixB = leftCanvasData.data[neiborIndex * 4 + 2];
+        var neiborPixR = nrightPixR + nleftPixR;
+        var neiborPixG = nrightPixG + nleftPixG;
+        var neiborPixB = nrightPixB + nleftPixB;
+        var colorDiff = Math.sqrt(Math.pow((neiborPixR - pixR), 2) + Math.pow((neiborPixG - pixG), 2) + Math.pow((neiborPixB - pixB), 2));
+        if(edgeMode != 0){
+        if (colorDiff > edgeThreshold) {
+          if(edgeMode == 2){
+            for (var c = 0; c < 5; c++) {
+                drawEllipse(kinectContext, x - c, y - c, 254, 0, 4, 2);
+            }
+          }
+          if(edgeMode == 1){
+            drawLine(kinectContext,x,y,0,0,0,2);
+          }
+        }}
+
+        var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
+        if (grayScale > brightnessThreshold) {
             drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
         } else {
             drawEllipse(kinectContext, x, y, 0, 0, 0, 1);
-
         }
     }
-    // kinectContext.drawImage(img, 0, 0);
+
 }
 
 function drawEllipse(ctx, _x, _y, r, g, b, size) {
@@ -167,5 +170,16 @@ function drawEllipse(ctx, _x, _y, r, g, b, size) {
     ctx.beginPath();
     ctx.ellipse(_x, _y, size, size, 45 * Math.PI / 180, 0, 2 * Math.PI);
     ctx.fill();
+    ctx.restore();
+}
+
+function drawLine(ctx, _x, _y, r, g, b, thickness) {
+    ctx.save();
+    ctx.strokeStyle = 'rgba(' + r + ',' + g + ',' + b + ',0.8)';
+    ctx.lineWidth = thickness;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(_x, _y);
+    ctx.stroke();
     ctx.restore();
 }

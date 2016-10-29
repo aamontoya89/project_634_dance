@@ -148,7 +148,6 @@ function rightDrawFeed(img) {
         // 0.21 R + 0.72 G + 0.07 B
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
         if (grayScale > 200) {
-
             drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
         } else {
             drawEllipse(kinectContext, x, y, 0, 0, 0, 1);

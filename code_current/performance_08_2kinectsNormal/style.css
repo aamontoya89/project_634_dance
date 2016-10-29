@@ -1,13 +1,13 @@
-/*		body {
-  color: #ffffff;
-  font-family: Monospace;
-  font-size: 13px;
-  text-align: center;
-  font-weight: bold;
-  background-color: #000000;
-  margin: 0px;
-  overflow: hidden;
-}*/
+    /*		body {
+			color: #ffffff;
+			font-family: Monospace;
+			font-size: 13px;
+			text-align: center;
+			font-weight: bold;
+			background-color: #000000;
+			margin: 0px;
+			overflow: hidden;
+		}*/
 
 #intro {
     position: absolute;
@@ -25,12 +25,13 @@
     height: 100%;
 }
 
-#leftTempKinectronCanvas {
-    display: none;
+
+#leftTempKinectronCanvas{
+  display: none;
 }
 
-#rightTempKinectronCanvas {
-    display: none;
+#rightTempKinectronCanvas{
+  display: none;
 }
 
 a {

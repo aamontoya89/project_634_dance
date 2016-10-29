@@ -1,7 +1,6 @@
 // var width = 400*1.02;
 // var height = 272*1.067;
 //width:height = 20:16
-
 var width = 340;
 var height = 272;
 var widthTHREEJS = 340;
@@ -106,6 +105,7 @@ function init() {
     rightTempKinectronCanvas = document.getElementById('rightTempKinectronCanvas');
     rightTempKinectronContext = rightTempKinectronCanvas.getContext('2d');
 
+
     //setup kinectron canvas size
     kinectronCanvas.setAttribute('width', width);
     kinectronCanvas.setAttribute('height', height);
@@ -117,7 +117,8 @@ function init() {
     kinectContext.fillStyle = "#ffffff";
 
     kinectContext.fillRect(0, 0, width, height);
-    //kinectContext.restore();
+    // leftKinectContext.restore();
+    // rightKinectContext.restore();
 
     leftKinectron.startDepth();
     rightKinectron.startDepth();
@@ -308,7 +309,7 @@ function animate() {
             break;
         case 5:
             //SCENE 5, Flying particles-moving following Donald
-            console.log("Scene 5-Flying particles-moving following Donald");
+            console.log("Scene 5-Flying particles - following Donald");
             s2Timer = 0;
             s6ColIndex = 0;
             var s5Acc = {
@@ -375,68 +376,14 @@ function animate() {
             s6ColIndex++;
             break;
         case 8:
-            leftDrawFeed(leftCurrentDepthImg);
-            rightDrawFeed(rightCurrentDepthImg);
+            // leftDrawFeed(leftCurrentDepthImg);
+            // rightDrawFeed(rightCurrentDepthImg);
+            drawFeed(leftCurrentDepthImg,rightCurrentDepthImg)
             break;
     }
     timer += 1;
 
 }
-
-//0 = 48; 1=49...9=57, a=65
-//0-7 controls different scenes list above
-//8 triggers kinect feed
-//9 hides kinect feed
-//lower case z hides all the canvases and show three.js scenes
-//lower case x shows back the canvas(canvases)
-window.addEventListener('keydown', function(evt) {
-    if (evt.keyCode == 48) {
-        console.log("typing 0");
-        onScene = 0;
-    } else if (evt.keyCode == 49) {
-        console.log("typing 1");
-        onScene = 1;
-    } else if (evt.keyCode == 50) {
-        console.log("typing 2");
-        onScene = 2;
-    } else if (evt.keyCode == 51) {
-        console.log("typing 3");
-        onScene = 3;
-    } else if (evt.keyCode == 52) {
-        console.log("typing 4");
-        onScene = 4;
-    } else if (evt.keyCode == 53) {
-        console.log("typing 5");
-        onScene = 5;
-    } else if (evt.keyCode == 54) {
-        console.log("typing 6");
-        onScene = 6;
-    } else if (evt.keyCode == 55) {
-        console.log("typing 7");
-        onScene = 7;
-    } else if (evt.keyCode == 56) {
-        console.log("typing 8");
-        onScene = 8;
-        $('#intro').removeClass('hide').addClass('show');
-        $('#leftKinectron').removeClass('hide').addClass('showHalf');
-        $('#rightKinectron').removeClass('hide').addClass('showHalf');
-    } else if (evt.keyCode == 57) {
-        console.log("typing 9");
-        onScene = 0;
-        $('#leftKinectron').removeClass('showHalf').addClass('hide');
-        $('#rightKinectron').removeClass('showHalf').addClass('hide');
-    } else if (evt.keyCode == 90) {
-        console.log("typing z");
-        onScene = 0;
-        $('#intro').removeClass('show').addClass('hide');
-    } else if (evt.keyCode == 88) {
-        console.log("typing x");
-        onScene = 0;
-        $('#intro').removeClass('hide').addClass('show');
-    }
-
-}, true);
-
 
 function render() {
     var time = performance.now() * 0.0005;
@@ -472,6 +419,73 @@ function ellipse(ctx, _x, _y, size, size) {
     ctx.restore();
 }
 
+
+//0 = 48; 1=49...9=57, a=65
+//0-7 controls different scenes list above
+//8 should trigger kinect feed
+//9 should hide kinect feed
+//lower case z should hide all the canvases and show three.js scenes
+//lower case x should show back the canvas(canvases)
+window.addEventListener('keydown', function(evt) {
+    if (evt.keyCode == 48) {
+        console.log("typing 0");
+        onScene = 0;
+    } else if (evt.keyCode == 49) {
+        console.log("typing 1");
+        onScene = 1;
+    } else if (evt.keyCode == 50) {
+        console.log("typing 2");
+        onScene = 2;
+    } else if (evt.keyCode == 51) {
+        console.log("typing 3");
+        onScene = 3;
+    } else if (evt.keyCode == 52) {
+        console.log("typing 4");
+        onScene = 4;
+    } else if (evt.keyCode == 53) {
+        console.log("typing 5");
+        onScene = 5;
+    } else if (evt.keyCode == 54) {
+        console.log("typing 6");
+        onScene = 6;
+    } else if (evt.keyCode == 55) {
+        console.log("typing 7");
+        onScene = 7;
+    } else if (evt.keyCode == 56) {
+        console.log("typing 8");
+        onScene = 8;
+        $('#intro').removeClass('show').addClass('hide');
+        // drawFeed(currentDepthImg);
+        $('#kinectron').removeClass('hide').addClass('show');
+    } else if (evt.keyCode == 57) {
+        console.log("typing 9");
+        onScene = 0;
+        $('#kinectron').removeClass('show').addClass('hide');
+    } else if (evt.keyCode == 90) {
+        console.log("typing z");
+        onScene = 0;
+        $('#intro').removeClass('show').addClass('hide');
+    } else if (evt.keyCode == 88) {
+        console.log("typing x");
+        onScene = 0;
+        $('#intro').removeClass('hide').addClass('show');
+    } else if (evt.keyCode == 76) {
+        console.log("typing l");
+        onScene = 8;
+        edgeMode = 1;
+    }else if (evt.keyCode == 75) {
+        console.log("typing k");
+        onScene = 8;
+        edgeMode = 2;
+    }else if (evt.keyCode == 74) {
+        console.log("typing j");
+        onScene = 8;
+        edgeMode = 0;
+    }
+
+
+}, true)
+
 window.addEventListener('keydown', function(evt) {
     if (evt.key == 'ArrowUp') {
         zPosition = 2000;
@@ -485,7 +499,6 @@ window.addEventListener('keydown', function(evt) {
     if (evt.key == 'ArrowRight') {
         zPosition -= 200;
     }
-
 });
 // function onWindowResize(event) {
 //     camera.aspect = window.innerWidth / window.innerHeight;

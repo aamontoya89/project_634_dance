@@ -376,8 +376,9 @@ function animate() {
             s6ColIndex++;
             break;
         case 8:
-            leftDrawFeed(leftCurrentDepthImg);
-            rightDrawFeed(rightCurrentDepthImg);
+            // leftDrawFeed(leftCurrentDepthImg);
+            // rightDrawFeed(rightCurrentDepthImg);
+            drawFeed(leftCurrentDepthImg,rightCurrentDepthImg)
             break;
     }
     timer += 1;
@@ -455,7 +456,7 @@ window.addEventListener('keydown', function(evt) {
         onScene = 8;
         $('#intro').removeClass('show').addClass('hide');
         // drawFeed(currentDepthImg);
-        $('#kinectron').removeClass('hide').addClass('show');  
+        $('#kinectron').removeClass('hide').addClass('show');
     } else if (evt.keyCode == 57) {
         console.log("typing 9");
         onScene = 0;
