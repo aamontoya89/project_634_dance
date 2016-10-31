@@ -8,6 +8,9 @@
 			margin: 0px;
 			overflow: hidden;
 		}*/
+    body{
+      background-color: #000000;
+    }
 
 #intro {
     position: absolute;

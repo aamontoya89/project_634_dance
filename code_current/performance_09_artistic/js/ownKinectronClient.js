@@ -5,12 +5,12 @@ var kinectContext = kinectronCanvas.getContext("2d");
 
 //define the variables for kinectron constructor
 var leftUsername = "kinectron";
-var leftHost = "172.16.251.69";
+var leftHost = "172.17.64.245";
 var leftPort = "9001";
 var leftPath = "/";
 
 var rightUsername = "kinectron";
-var rightHost = "172.16.242.210";
+var rightHost = "172.17.75.57";
 var rightPort = "9001";
 var rightPath = "/";
 
@@ -117,7 +117,7 @@ function drawFeed(leftImg, rightImg) {
     rightIsFirstTime = false;
     rightCanvasData = rightTempKinectronContext.getImageData(0, 0, 340, 272);
     leftCanvasData = leftTempKinectronContext.getImageData(0, 0, 340, 272);
-    for (var n = 0; n < 2000; n++) {
+    for (var n = 0; n < 7000; n++) {
         var x = Math.floor(Math.random() * rightCanvasData.width);
         var y = Math.floor(Math.random() * rightCanvasData.height);
         var pixIndex = y * rightCanvasData.width + x;
@@ -150,15 +150,15 @@ function drawFeed(leftImg, rightImg) {
             }
           }
           if(edgeMode == 1){
-            drawLine(kinectContext,x,y,0,0,0,2);
+            drawLine(kinectContext,x,y,0,0,0,0.5);
           }
         }}
 
         var grayScale = 0.21 * pixR + 0.72 * pixG + 0.07 * pixB;
         if (grayScale > brightnessThreshold) {
-            drawEllipse(kinectContext, x, y, 255, 255, 255, 2);
+            drawEllipse(kinectContext, x, y, 0, 0, 0, 2);
         } else {
-            drawEllipse(kinectContext, x, y, 0, 0, 0, 1);
+            drawEllipse(kinectContext, x, y, 255, 255, 255, 1);
         }
     }
 
