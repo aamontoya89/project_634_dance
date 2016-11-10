@@ -15,7 +15,7 @@ for our final project for that class, we teamed with choreographer/dancer donald
 
 here are some pics, video and repo:
 
-![puppet01](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![puppet01](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet1.jpg "Logo Title Text 1")
 
 here you can find the repo:
 
