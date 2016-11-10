@@ -15,11 +15,11 @@ for our final project for that class, we teamed with choreographer/dancer donald
 
 here are some pics, video and repo:
 
-![puppet_00](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet_00.jpg "puppet 01")
+![puppet_00](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet_00.jpg "puppet 00")
 
-![puppet_01](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet_01.jpg "puppet 02")
+![puppet_01](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet_01.jpg "puppet 01")
 
-![puppet_02](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet_2.jpg "puppet 03")
+![puppet_02](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet_02.jpg "puppet 02")
 
 here you can find the repo:
 [https://github.com/aamontoya89/project_puppet](https://github.com/aamontoya89/project_puppet)
