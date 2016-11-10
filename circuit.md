@@ -15,11 +15,11 @@ for our final project for that class, we teamed with choreographer/dancer donald
 
 here are some pics, video and repo:
 
-![puppet01](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet1.jpg "puppet 01")
+![puppet_00](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet_00.jpg "puppet 01")
 
-![puppet02](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet1.jpg "puppet 02")
+![puppet_01](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet_01.jpg "puppet 02")
 
-![puppet03](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet1.jpg "puppet 03")
+![puppet_02](https://github.com/aamontoya89/project_634_dance/raw/gh-pages/pics/puppet_2.jpg "puppet 03")
 
 here you can find the repo:
 [https://github.com/aamontoya89/project_puppet](https://github.com/aamontoya89/project_puppet)
@@ -44,7 +44,7 @@ here you can find the repo:
 [https://github.com/aamontoya89/project_634_dance](https://github.com/aamontoya89/project_634_dance)
 
 shoutouts to
-* donald c. shorter jr for being awesome
+* donald c. shorter jr for being awesome <3
 * mimi yin for helping us out and giving us always guidance and support
 * lisa jamhoury and shawn van every for developing kinectron
 * kevin, marlon, rob and the whole e.r. for allowing us to borrow so much stuff
