@@ -53,3 +53,5 @@ shoutouts to
 for comments and questions, contact us via
 
 ~~ caiyuli.com & aaronmontoya.cl ~~
+
+all pictures courtesy of the artists
