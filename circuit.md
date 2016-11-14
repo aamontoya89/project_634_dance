@@ -48,6 +48,7 @@ shoutouts to
 * mimi yin for helping us out and giving us always guidance and support
 * lisa jamhoury and shawn van every for developing kinectron
 * kevin, marlon, rob and the whole e.r. for allowing us to borrow so much stuff
+* kat sullivan and moon for the white marley floor and spiritual support
 * to github for taking care of our code
 
 for comments and questions, contact us via
